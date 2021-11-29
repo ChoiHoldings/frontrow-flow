@@ -1,0 +1,20 @@
+apiVersion: skaffold/v2beta23
+kind: Config
+build:
+  local:
+    useBuildkit: true
+    push: false
+  artifacts:
+    - image: flow.dev
+      context: .
+      docker:
+        dockerfile: apps/flow-test/Dockerfile
+deploy:
+  kubeContext: docker-desktop
+  kubectl:
+    manifests:
+      - tools/k8s/dev/blockchain/*.yaml
+portForward:
+  - resourceType: deployment
+    resourceName: flow-dev
+    port: 7000

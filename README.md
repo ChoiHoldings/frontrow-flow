@@ -2,9 +2,11 @@
 
 The Cadence contracts defined in this repository are for use on the FrontRow platform at [frontrow.kr](https://frontrow.kr)
 
-The contracts and tests have been extracted from an [Nx])(https://nx.dev/) monorepo.
+The contracts and tests have been extracted from an [Nx](https://nx.dev/) monorepo.
 
-Contract overview: [apps/flow-test](./apps/flow-test)
+## Overview
+
+See the Readme in [apps/flow-test](./apps/flow-test)
 
 ## Organization
 

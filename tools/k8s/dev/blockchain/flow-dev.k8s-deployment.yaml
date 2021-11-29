@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow-dev
+  labels:
+    component: flow-dev
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: flow-dev
+      tier: backend
+  template:
+    metadata:
+      labels:
+        component: flow-dev
+        tier: backend
+    spec:
+      containers:
+        - name: flow-dev
+          image: flow.dev
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 7000
