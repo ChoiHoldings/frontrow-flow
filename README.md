@@ -10,17 +10,51 @@ See the Readme in [apps/flow-test](./apps/flow-test)
 
 ## Usage
 
+### Setup
+
+The Flow CLI must be installed and available globally:
+
+```bash
+# Mac
+brew install flow-cli
+
+# Linux
+sh -ci "$(curl -fsSL https://storage.googleapis.com/flow-cli/install.sh)"
+```
+
 **Install packages**
 
-```sh
+```bash
 npm install
 ```
 
-See the [`flow-test`](./apps/flow-test#testing-1) Readme for testing and dev deploy instructions.
+### Testing
 
-Build a Docker image that runs the emulator and deploys contracts:
+```
+npm run flow-test
+```
 
-```sh
+When running transactions via the emulator, you can print logs using the `log()` function and prefixing the output with `LOG:`, e.g.
+
+```
+transaction() {
+  execute {
+    log("LOG: HELLO!!!")
+  }
+}
+```
+
+### Deploy
+
+Local
+
+```
+npm run flow-dev
+```
+
+Docker
+
+```
 docker build --progress=plain --no-cache -t flow-dev -f apps/flow-test/Dockerfile --target=dev .
 ```
 
