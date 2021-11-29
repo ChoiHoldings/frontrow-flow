@@ -1,0 +1,376 @@
+{
+  "npmScope": "ismedia",
+  "affected": {
+    "defaultBase": "main"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "@nrwl/workspace/tasks-runners/default",
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
+    }
+  },
+  "targetDependencies": {
+    "build": [
+      {
+        "target": "build",
+        "projects": "dependencies"
+      }
+    ]
+  },
+  "projects": {
+    "api": {
+      "tags": ["scope:api", "type:app"]
+    },
+    "api-data-access-blueprint": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-celebrity": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-collector": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-core": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-drop-registration": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-email": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-login": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-nft": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-nft-purchase": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-partner": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-query": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-rights-provider": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-user": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-user-registration": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-domain-blueprint": {
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-celebrity": {
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-collector": {
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-core": {
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-drop-registration": {
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-nft": {
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-nft-purchase": {
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-partner": {
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-user": {
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-user-registration": {
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-feature-blueprint": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-celebrity": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-collector": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-core": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-forgot-password": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-health": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-login": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-nft": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-nft-purchase": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-notification-webhook": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-partner": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-payments": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-query": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-user": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-user-registration": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-util-app-config": {
+      "tags": ["scope:api", "type:util"]
+    },
+    "api-util-auth": {
+      "tags": ["scope:api", "type:util"]
+    },
+    "api-util-aws": {
+      "tags": ["scope:api", "type:util"]
+    },
+    "api-util-aws-ses": {
+      "tags": ["scope:api", "type:util"]
+    },
+    "api-util-crypto": {
+      "tags": ["scope:api", "type:util"]
+    },
+    "api-util-forgot-password": {
+      "tags": ["scope:api", "type:util"]
+    },
+    "api-util-login": {
+      "tags": ["scope:api", "type:util"]
+    },
+    "db-api": {
+      "tags": ["scope:db-api", "type:app"]
+    },
+    "flow-test": {
+      "tags": ["scope:e2e", "type:app"]
+    },
+    "shared-data-access-flow": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-auth": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-blueprint": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-celebrity": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-collector": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-core": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-drop-registration": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-forgot-password": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-login": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-nft": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-nft-purchase": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-notification-webhook": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-partner": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-payments": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-query": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-user": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-user-registration": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-auth": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-blueprint": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-celebrity": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-collector": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-core": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-db-fixtures": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-drop-registration": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-flow": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-flow-crypto": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-format": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-login": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-nft": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-nft-purchase": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-parse": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-partner": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-regexes": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-rights-provider": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-translations": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-user": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-user-registration": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-validate": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "test-helper": {
+      "tags": ["scope:api", "type:app"]
+    },
+    "test-helper-data-access-db": {
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "test-helper-feature-state": {
+      "tags": ["scope:api", "type:feature"]
+    },
+    "web": {
+      "tags": ["scope:web", "type:app"]
+    },
+    "web-admin": {
+      "tags": ["scope:web", "type:app"]
+    },
+    "web-admin-e2e": {
+      "tags": ["scope:e2e", "type:app"]
+    },
+    "web-data-access-api": {
+      "tags": ["scope:web", "type:data-access"]
+    },
+    "web-data-access-fcl": {
+      "tags": ["scope:web", "type:data-access"]
+    },
+    "web-data-access-state": {
+      "tags": ["scope:web", "type:data-access"]
+    },
+    "web-e2e": {
+      "tags": ["scope:e2e", "type:app"]
+    },
+    "web-feature-admin-blueprint": {
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-admin-celebrity": {
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-admin-partner": {
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-admin-user": {
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-auth": {
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-collector": {
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-login-redirect": {
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-nft": {
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-payments": {
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-user-settings": {
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-ui-assets": {
+      "tags": ["scope:web", "type:ui"]
+    },
+    "web-ui-theme": {
+      "tags": ["scope:web", "type:ui"]
+    },
+    "web-ui-widgets": {
+      "tags": ["scope:web", "type:ui"]
+    },
+    "web-util-admin-fields": {
+      "tags": ["scope:web", "type:util"]
+    },
+    "web-util-api-field-error": {
+      "tags": ["scope:web", "type:util"]
+    },
+    "web-util-clickaway": {
+      "tags": ["scope:web", "type:util"]
+    },
+    "web-util-validate": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "web-util-vite-config": {
+      "tags": []
+    }
+  }
+}

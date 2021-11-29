@@ -1,0 +1,62 @@
+{
+  "emulators": {
+    "default": {
+      "port": 3569,
+      "serviceAccount": "emulator-account"
+    }
+  },
+  "contracts": {
+    "FUSD": {
+      "source": "./libs/shared/data-access-flow/src/lib/frontrow/contracts/FUSD.cdc",
+      "aliases": {
+        "testnet": "0xe223d8a629e49c68"
+      }
+    },
+    "FrontRow": "./libs/shared/data-access-flow/src/lib/frontrow/contracts/FrontRow.cdc",
+    "NonFungibleToken": {
+      "source": "./libs/shared/data-access-flow/src/lib/frontrow/contracts/NonFungibleToken.cdc",
+      "aliases": {
+        "emulator": "0xf8d6e0586b0a20c7",
+        "testnet": "0x631e88ae7f1d7c20"
+      }
+    },
+    "FrontRowStorefront": "./libs/shared/data-access-flow/src/lib/frontrow/contracts/FrontRowStorefront.cdc",
+    "FungibleToken": {
+      "source": "./libs/shared/data-access-flow/src/lib/frontrow/contracts/FungibleToken.cdc",
+      "aliases": {
+        "emulator": "0xee82856bf20e2aa6",
+        "testnet": "0x9a0766d93b6608b7"
+      }
+    }
+  },
+  "networks": {
+    "emulator": "127.0.0.1:3569",
+    "testnet": "access.devnet.nodes.onflow.org:9000"
+  },
+  "accounts": {
+    "emulator-account": {
+      "address": "f8d6e0586b0a20c7",
+      "key": "f8e188e8af0b8b414be59c4a1a15cc666c898fb34d94156e9b51e18bfde754a5"
+    },
+    "emulator-account-eve": {
+      "address": "01cf0e2f2f715450",
+      "key": "ab2a2c0123d720e036b8809a8a930bc16ab9dedc534a57872445092fecd139f4",
+      "pubKey": "63dac8d89eb749075b226945af0f4ca35427fba5d0caeb89512ad4c05fce8c439e5a59e13bff6e70703ccbcafcbc4f4abe384c7dacc47ec6a2bba30f29421eda"
+    },
+    "emulator-account-frank": {
+      "address": "179b6b1cb6755e31",
+      "key": "588a3a399697341286ff2080099405d06e1c9cf237ca23bb8e547b65f99208e1",
+      "pubKey": "02c60a253f4f14dd2ccf7630448d82a13e527738431797efdfad50a54be1c8023c48e309d67273e713a1cd3305f1c391a6f816b264ee5cdfdb3cb5aa48b02f38"
+    },
+    "development-account": {
+      "address": "01cf0e2f2f715450",
+      "key": "fa577c69ab742382211705b405f4e0c5d085623b1a17a1b8ddd9e4933501714c",
+      "pubKey": "7937172429c9d2b738f695650d00ddae1e40089e5c31552a3f1048149a4cf41c08d34a319ba306da41dc0239b9bbf450aa701634e53a0917d3d5aaa2f08099f1"
+    }
+  },
+  "deployments": {
+    "emulator": {
+      "emulator-account": ["FUSD", "FrontRow", "NonFungibleToken", "FrontRowStorefront"]
+    }
+  }
+}
