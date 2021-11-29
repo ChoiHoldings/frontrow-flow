@@ -6,7 +6,7 @@ The contracts and tests have been extracted from an [Nx](https://nx.dev/) monore
 
 ## Overview
 
-See the Readme in [apps/flow-test](./apps/flow-test)
+See the Readme in [apps/flow-test](./apps/flow-test#frontrow-flow-contracts)
 
 ## Usage
 
@@ -46,16 +46,33 @@ transaction() {
 
 ### Deploy
 
-Local
+**Local (emulator)**
 
 ```
 npm run flow-dev
 ```
 
-Docker
+**Docker (emulator)**
 
 ```
 docker build --progress=plain --no-cache -t flow-dev -f apps/flow-test/Dockerfile --target=dev .
+```
+
+**Testnet**
+
+- Requires `flow-testnet.json` with `accounts/testnet-account`
+- Import aliases must be set up correctly
+
+Create FrontRow
+
+```sh
+flow accounts add-contract FrontRow ./libs/shared/data-access-flow/src/lib/frontrow/contracts/FrontRow.cdc --signer testnet-account -n testnet -f flow.json -f flow-testnet.json
+```
+
+Create FrontRowStorefront
+
+```
+flow accounts add-contract FrontRowStorefront ./libs/shared/data-access-flow/src/lib/frontrow/contracts/FrontRowStorefront.cdc --signer testnet-account -n testnet -f flow.json -f flow-testnet.json
 ```
 
 ## Organization

@@ -36,3 +36,4 @@ pnpm-lock.yaml
 
 # Environment file
 .env
+flow-testnet.json
