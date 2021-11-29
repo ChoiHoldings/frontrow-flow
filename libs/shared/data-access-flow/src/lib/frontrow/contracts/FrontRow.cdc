@@ -56,6 +56,7 @@ pub contract FrontRow: NonFungibleToken {
   // Storage paths
   pub let CollectionStoragePath: StoragePath
   pub let CollectionPublicPath: PublicPath
+  pub let MinterPrivatePath: PrivatePath
   pub let AdminStoragePath: StoragePath
 
   // The struct that represents the NFT type or a template. When NFTs are minted
@@ -160,11 +161,26 @@ pub contract FrontRow: NonFungibleToken {
     }
   }
 
+  // Minter
+  //
+  // The interface that allows owner to mint new NFTs
+  //
+  pub resource interface Minter {
+
+    // mintNFT mints one NFT from a blueprint
+    //
+    // Parameters: blueprintId: the ID of the blueprint used for minting
+    //
+    // Returns: @FrontRow.NFT token that was minted
+    //
+    pub fun mintNFT(blueprintId: UInt32): @NFT
+  }
+
   // Admin is a special authorization resource that
   // allows the owner to perform important functions such as
   // manage blueprints and mint NFTs
   //
-  pub resource Admin {
+  pub resource Admin: Minter {
 
     // printBlueprint creates a new blueprint and stores it in the blueprints dictionary
     // in the FrontRow smart contract
@@ -328,7 +344,7 @@ pub contract FrontRow: NonFungibleToken {
     //
     // Returns: @NonFungibleToken.NFT the token that was withdrawn
     //
-    pub fun withdraw(withdrawID: UInt64): @NonFungibleToken.NFT {
+    pub fun withdraw(withdrawID: UInt64): @NFT {
 
       // Remove the NFT from the Collection
       let token <- self.ownedNFTs.remove(key: withdrawID)
@@ -337,7 +353,7 @@ pub contract FrontRow: NonFungibleToken {
       emit Withdraw(id: token.id, from: self.owner?.address)
 
       // Return the withdrawn token
-      return <-token
+      return <-(token as! @FrontRow.NFT)
     }
 
     // deposit take an NFT and adds it to the Collections dictionary
@@ -497,10 +513,14 @@ pub contract FrontRow: NonFungibleToken {
     // Set paths aliases
     self.CollectionStoragePath = /storage/FrontRowNFTCollection
     self.CollectionPublicPath = /public/FrontRowNFTCollectionPublic
+    self.MinterPrivatePath = /private/MinterPrivate
     self.AdminStoragePath = /storage/FrontRowAdmin
 
     // Create the Admin resource and save it to storage
     self.account.save<@Admin>(<- create Admin(), to: self.AdminStoragePath)
+
+    // Create a private capability for the Minter
+    self.account.link<&{FrontRow.Minter}>(FrontRow.MinterPrivatePath, target: FrontRow.AdminStoragePath)
 
     emit ContractInitialized()
   }

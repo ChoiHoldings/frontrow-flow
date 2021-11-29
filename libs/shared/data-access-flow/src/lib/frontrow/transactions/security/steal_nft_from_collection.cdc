@@ -26,8 +26,6 @@ transaction(nftId: UInt64, ownerAddress: Address) {
   }
 
   execute {
-    let nft <-self.providerCollection
-      .borrowFrontRowNFT(nftID)!.withdraw(withdrawID: nftID)
-    self.receiverCollection.deposit(token: <-nft)
+    log("LOG: Should not get to this point.")
   }
 }

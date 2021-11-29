@@ -10,6 +10,7 @@ transaction(blueprintId: UInt32, price: UFix64) {
   let frontrowNFTsProvider: Capability<&FrontRow.Collection{NonFungibleToken.Provider,
     FrontRow.CollectionPublic}>
   let storefront: &FrontRowStorefront.Storefront
+  let minterCapability: Capability<&{FrontRow.Minter}>
 
   prepare(account: AuthAccount) {
     // Create a provider capability if one is not provided by default
@@ -39,6 +40,13 @@ transaction(blueprintId: UInt32, price: UFix64) {
         account.borrow<&FrontRowStorefront.Storefront>(from:
         FrontRowStorefront.StorefrontStoragePath)
       ?? panic("Missing or mis-typed Storefront.")
+
+    // Minter capability allows to mint NFTs on demand during purchase
+    self.minterCapability =
+      account.getCapability<&{FrontRow.Minter}>(FrontRow.MinterPrivatePath)
+
+    assert(self.minterCapability != nil,
+      message: "Missing permissions to mint NFTs on demand.")
   }
 
   execute {
@@ -46,7 +54,8 @@ transaction(blueprintId: UInt32, price: UFix64) {
       nftProviderCapability: self.frontrowNFTsProvider,
       blueprintId: blueprintId,
       price: price,
-      beneficiary: self.fusdReceiver
+      beneficiary: self.fusdReceiver,
+      minterCapability: self.minterCapability
     )
   }
 }

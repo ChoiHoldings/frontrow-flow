@@ -18,7 +18,7 @@ import {
   blueprintC,
   blueprintD,
   getBlueprintsCount,
-  getFrontRowNFT,
+  getMintCountPerBlueprint,
 } from '../src/utils/frontrow'
 
 import {
@@ -46,8 +46,15 @@ let Admin: FlowAccount
 let Eve: FlowAccount
 let Frank: FlowAccount
 
-//
-const blueprints = [blueprintA, blueprintB, blueprintC, blueprintD]
+// Set up blueprints that will be used in this test.
+// The "preMintQuantity" property is a helper which enables pre-minting of NFTs
+// before the tests are executed.
+const blueprints = [
+  { ...blueprintA, preMintQuantity: blueprintA.maxQuantity },
+  { ...blueprintB, preMintQuantity: blueprintB.maxQuantity },
+  { ...blueprintC, preMintQuantity: 0 },
+  { ...blueprintD, preMintQuantity: 0 },
+]
 const saleOffers = [saleOfferA, saleOfferB, saleOfferC]
 let buyers: { account: FlowAccount; amount: number }[] = []
 
@@ -120,12 +127,14 @@ describe('FrontRowStorefront Contract', () => {
       await shallPass(printBlueprint(blueprint.maxQuantity, blueprint.metadata, signers))
 
       // Mint NFTs
-      expect(
-        await shallPass(
-          batchMintNFT(blueprint.id, blueprint.maxQuantity, recipient, signers),
-        ),
-      )
-      totalSupply += blueprint.maxQuantity
+      if (blueprint.preMintQuantity != 0) {
+        expect(
+          await shallPass(
+            batchMintNFT(blueprint.id, blueprint.preMintQuantity, recipient, signers),
+          ),
+        )
+        totalSupply += blueprint.preMintQuantity
+      }
     }
 
     // Check if total blueprints count is correct
@@ -210,7 +219,7 @@ describe('FrontRowStorefront Contract', () => {
     let nftId: number
 
     //
-    it('shall be able to purchase one NFT via a sale offer', async () => {
+    it('shall be able to purchase one pre-minted NFT via a sale offer', async () => {
       // Check the Admin and Eve balances before the purchase
       const beforeAdminBalance = await getBalance(Admin)
       const beforeEveBalance = await getBalance(Eve)
@@ -296,6 +305,72 @@ describe('FrontRowStorefront Contract', () => {
       )
       expect.assertions(1)
     })
+
+    //
+    it('shall be able to purchase one on demand minted NFT via a sale offer', async () => {
+      // Check the Admin and Eve balances before the purchase
+      const beforeAdminBalance = await getBalance(Admin)
+      const beforeEveBalance = await getBalance(Eve)
+
+      // Get ID of the NFT that should be sold next
+      const sellerCollectionIDsBefore = await getCollectionIDs(Admin)
+      const nextNftId =
+        sellerCollectionIDsBefore[sellerCollectionIDsBefore.length - 1] + 1
+
+      // There shouldn't be any pre-minted NFTs for this blueprint
+      const mintCount = await getMintCountPerBlueprint(saleOfferC.blueprintId)
+      expect(mintCount).toBe(0)
+
+      // Since there are no pre-minted NFTs, the purchased NFT should be minted on the fly
+      const buyNftTxResult = await shallPass(buyNFT(Eve, saleOfferC.blueprintId))
+      const listedPriceUFix64 = toUFix64(saleOfferC.price)
+
+      // Check transaction details in the emitted event
+      // Make sure the "FrontRow.Withdraw" event didn't fire since we've minted on demand
+      expect(buyNftTxResult).toEmit([
+        {
+          type: 'FUSD.TokensWithdrawn',
+          data: { amount: listedPriceUFix64, from: Eve.address },
+        },
+        {
+          type: 'FUSD.TokensDeposited',
+          data: { amount: listedPriceUFix64, to: Admin.address },
+        },
+        {
+          type: 'FUSD.TokensDeposited',
+          data: { amount: listedPriceUFix64, to: Admin.address },
+        },
+        {
+          type: 'FrontRowStorefront.Purchase',
+          data: { blueprintId: saleOfferC.blueprintId, sold: 1, soldOut: false },
+        },
+        {
+          type: 'FrontRow.Deposit',
+          data: { id: nextNftId, to: Eve.address },
+        },
+      ])
+
+      // Check the balances after the purchase
+      const afterAdminBalance = await getBalance(Admin)
+      const afterEveBalance = await getBalance(Eve)
+
+      // Prep balances for comparison
+      const expectedAdminBalance = parseFloat(beforeAdminBalance) + saleOfferC.price
+      const expectedEveBalance = parseFloat(beforeEveBalance) - saleOfferC.price
+
+      // Make sure the purchase has been reflected correctly in balances of both parties
+      expect(afterAdminBalance).toBe(toUFix64(expectedAdminBalance))
+      expect(afterEveBalance).toBe(toUFix64(expectedEveBalance))
+
+      // Make sure seller's collection didn't change since NFT was minted on demand
+      // and deposited into buyer's collection on the fly
+      const sellerCollectionIDsAfter = await getCollectionIDs(Admin)
+      expect(sellerCollectionIDsBefore).toEqual(sellerCollectionIDsAfter)
+
+      // The mint count should be 1
+      const mintCountAfter = await getMintCountPerBlueprint(saleOfferC.blueprintId)
+      expect(mintCountAfter).toBe(1)
+    })
   })
 
   //
@@ -359,14 +434,12 @@ describe('FrontRowStorefront Contract', () => {
       const victims: FlowAccount[] = [Eve, Admin]
 
       for (const victim of victims) {
-        // Get a list of victim's NFTs
-        const nfts = await getCollectionIDs(victim)
+        // Pick any arbitrary NFT to steal since the promise should be rejected
+        // before the check if this NFT exists in victims collection
+        const nftID = 1
 
-        // Pick the first NFT in the victim's collection
-        const nft = await getFrontRowNFT(victim, nfts[0])
-
-        await expect(stealNftFromCollection(nft.id, victim, [thief])).rejects.toMatch(
-          'not accessible',
+        await expect(stealNftFromCollection(nftID, victim, [thief])).rejects.toMatch(
+          "Couldn't borrow FrontRow collection provider from account.",
         )
       }
       expect.assertions(victims.length)
@@ -421,7 +494,7 @@ describe('FrontRowStorefront Contract', () => {
           type: 'FrontRowStorefront.SaleOfferRemoved',
           data: {
             blueprintId: saleOfferC.blueprintId,
-            sold: 0,
+            sold: 1,
             soldOut: false,
           },
         },

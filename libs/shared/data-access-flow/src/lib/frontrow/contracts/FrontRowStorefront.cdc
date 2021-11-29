@@ -147,6 +147,9 @@ pub contract FrontRowStorefront {
     // The simple (non-Capability, non-complex) details of the sale
     access(self) let details: SaleOfferDetails
 
+    // The capability to mint NFTs
+    access(contract) let minterCapability: Capability<&{FrontRow.Minter}>
+
     // A capability allowing this resource to withdraw the NFT with the given ID
     // from its collection. This capability allows the resource to withdraw *any* NFT,
     // so be careful when giving such a capability to a resource and
@@ -183,14 +186,28 @@ pub contract FrontRowStorefront {
       // Check if NFTs are not sold out
       assert(self.details.sold < blueprint.maxQuantity, message: "NFTs are sold out.")
 
-      // Set the NFT ID based on the number NFTs sold so far
-      let nftId = blueprint.getNftId(self.details.sold + 1)
+      // Borrow minting capability for on demand minting
+      let minter: &{FrontRow.Minter} = self.minterCapability.borrow()!
+      assert(minter != nil, message: "Can't borrow minter capability.")
 
-      // Increment the purchase amount
-      self.details.recordPurchase()
+      // Get serial number of the NFT that's about to get purchased.
+      // The serial number based on a particular blueprint.
+      let nftSerialNumber : UInt32 = self.details.sold + 1
 
-      // Fetch the NFT to return to the purchaser.
-      let nft <-self.nftProviderCapability.borrow()!.withdraw(withdrawID: nftId!)
+      // Get ID of the existing pre-minted NFT (NFT ID is the resource UUID)
+      // If it does not exist the value will be nil
+      let nftId : UInt64? = blueprint.getNftId(nftSerialNumber)
+
+      // If NFT ID is not nil, pre-minted NFTs exist
+      let preMinted = nftId != nil
+
+      let nft: @FrontRow.NFT <- preMinted ?
+        // withdraw a pre-minted NFT
+        <-(self.nftProviderCapability.borrow()!
+          .withdraw(withdrawID: nftId!) as! @FrontRow.NFT)
+        :
+        // mint one on demand
+        <-self.minterCapability.borrow()!.mintNFT(blueprintId: blueprint.id)
 
       // Neither receivers nor providers are trustworthy, they must implement the correct
       // interface but beyond complying with its pre/post conditions they are not
@@ -202,24 +219,38 @@ pub contract FrontRowStorefront {
         nft.isInstance(Type<@FrontRow.NFT>()),
         message: "Withdrawn NFT is not of FrontRow.NFT type."
       )
-      assert(nft.id == nftId, message: "Withdrawn NFT doesn't have specified ID.")
+
+      // Make sure the correct NFT is being sold (pre-minted or minted on demand)
+      if preMinted {
+        // Pre-minted NFT: check ID of the withdrawn NFT
+        assert(nft.id == nftId,
+          message: "Selling incorrect NFT: withdrawn NFT has incorrect ID.")
+      } else {
+        // NFT minted on demand: check the blueprint ID and the serial number
+        assert(nft.blueprintId == blueprint.id && nft.serialNumber == nftSerialNumber,
+          message: "Selling incorrect NFT: serial number or/and blueprint are incorrect."
+        )
+      }
 
       // Send payment to the beneficiary
       let beneficiary = self.details.beneficiary.borrow()
       beneficiary!.deposit(from: <-payment)
 
-      // If all minted NFTs for a particular bluprint are purchased,
-      // we regard the offer as soldOut.
-      // Otherwise, we regard it as soldOut in the destructor.
+      // Increment the purchase amount
+      self.details.recordPurchase()
+
       let sold = self.details.sold
+
+      // Emit the Purchase event
       emit Purchase(
         blueprintId: self.details.blueprintId,
         sold: sold,
+        // If all minted NFTs for a bluprint are purchased, the offer is soldOut.
         soldOut: sold == blueprint.maxQuantity
       )
 
       // Returns purchased NFT token
-      return <-(nft as! @FrontRow.NFT)
+      return <-nft
     }
 
     // Initialize resource fields
@@ -227,7 +258,8 @@ pub contract FrontRowStorefront {
       nftProviderCapability: Capability<&{NonFungibleToken.Provider, FrontRow.CollectionPublic}>,
       blueprintId: UInt32,
       price: UFix64,
-      beneficiary: Capability<&{FungibleToken.Receiver}>
+      beneficiary: Capability<&{FungibleToken.Receiver}>,
+      minterCapability: Capability<&{FrontRow.Minter}>
     ) {
       //
       let blueprint: FrontRow.Blueprint? = FrontRow.getBlueprint(id: blueprintId)
@@ -242,8 +274,9 @@ pub contract FrontRowStorefront {
         beneficiary: beneficiary,
       )
 
-      // Store the NFT provider
+      // Store capabilities
       self.nftProviderCapability = nftProviderCapability
+      self.minterCapability = minterCapability
     }
   }
 
@@ -266,7 +299,8 @@ pub contract FrontRowStorefront {
       nftProviderCapability: Capability<&{NonFungibleToken.Provider, FrontRow.CollectionPublic}>,
       blueprintId: UInt32,
       price: UFix64,
-      beneficiary: Capability<&{FungibleToken.Receiver}>
+      beneficiary: Capability<&{FungibleToken.Receiver}>,
+      minterCapability: Capability<&{FrontRow.Minter}>
     )
 
     // removeSaleOffer removes sales offer from the owner's Storefront, sold out or not.
@@ -314,12 +348,14 @@ pub contract FrontRowStorefront {
     //              price: listing price for each NFT
     //              beneficiary: capability used for depositing the beneficiary's
     //                            sale proceeds
+    //              minterCapability: capability to mint NFTs. Used in on demand minting.
     //
     pub fun createSaleOffer(
       nftProviderCapability: Capability<&{NonFungibleToken.Provider, FrontRow.CollectionPublic}>,
       blueprintId: UInt32,
       price: UFix64,
-      beneficiary: Capability<&{FungibleToken.Receiver}>
+      beneficiary: Capability<&{FungibleToken.Receiver}>,
+      minterCapability: Capability<&{FrontRow.Minter}>
     ) {
       //
       let blueprint: FrontRow.Blueprint? = FrontRow.getBlueprint(id: blueprintId)
@@ -333,7 +369,8 @@ pub contract FrontRowStorefront {
         nftProviderCapability: nftProviderCapability,
         blueprintId: blueprintId,
         price: price,
-        beneficiary: beneficiary
+        beneficiary: beneficiary,
+        minterCapability: minterCapability,
       )
 
       // Add the new sale offer to the dictionary
