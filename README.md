@@ -8,6 +8,22 @@ The contracts and tests have been extracted from an [Nx](https://nx.dev/) monore
 
 See the Readme in [apps/flow-test](./apps/flow-test)
 
+## Usage
+
+**Install packages**
+
+```sh
+npm install
+```
+
+See the [`flow-test`](./apps/flow-test#testing-1) Readme for testing and dev deploy instructions.
+
+Build a Docker image that runs the emulator and deploys contracts:
+
+```sh
+docker build --progress=plain --no-cache -t flow-dev -f apps/flow-test/Dockerfile --target=dev .
+```
+
 ## Organization
 
 - [apps/flow-test](./apps/flow-test)
