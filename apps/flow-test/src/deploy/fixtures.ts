@@ -27,7 +27,6 @@ export const blueprintLeeDaHee = {
     type: 'nft',
   },
   price: 1700,
-  // TODO -- computation limit exceeded
   maxQuantity: 210,
 }
 
