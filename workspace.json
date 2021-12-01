@@ -53,6 +53,28 @@
         }
       }
     },
+    "api-data-access-asset": {
+      "root": "libs/api/data-access-asset",
+      "sourceRoot": "libs/api/data-access-asset/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/data-access-asset/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/data-access-asset"],
+          "options": {
+            "jestConfig": "libs/api/data-access-asset/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "api-data-access-blueprint": {
       "root": "libs/api/data-access-blueprint",
       "sourceRoot": "libs/api/data-access-blueprint/src",
@@ -577,6 +599,28 @@
         }
       }
     },
+    "api-feature-asset": {
+      "root": "libs/api/feature-asset",
+      "sourceRoot": "libs/api/feature-asset/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-asset/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-asset"],
+          "options": {
+            "jestConfig": "libs/api/feature-asset/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "api-feature-blueprint": {
       "root": "libs/api/feature-blueprint",
       "sourceRoot": "libs/api/feature-blueprint/src",
@@ -970,6 +1014,28 @@
         }
       }
     },
+    "api-util-aws-s3": {
+      "root": "libs/api/util-aws-s3",
+      "sourceRoot": "libs/api/util-aws-s3/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/util-aws-s3/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/util-aws-s3"],
+          "options": {
+            "jestConfig": "libs/api/util-aws-s3/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
     "api-util-aws-ses": {
       "root": "libs/api/util-aws-ses",
       "sourceRoot": "libs/api/util-aws-ses/src",
@@ -1117,6 +1183,28 @@
           "executor": "nx-flow:lint",
           "options": {
             "files": "libs/shared/data-access-flow/src/lib/frontrow/contracts/**/*.cdc,libs/shared/data-access-flow/src/lib/frontrow/scripts/**/*.cdc,libs/shared/data-access-flow/src/lib/frontrow/transactions/**/*.cdc"
+          }
+        }
+      }
+    },
+    "shared-util-api-asset": {
+      "root": "libs/shared/util-api-asset",
+      "sourceRoot": "libs/shared/util-api-asset/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/util-api-asset/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/util-api-asset"],
+          "options": {
+            "jestConfig": "libs/shared/util-api-asset/jest.config.ts",
+            "passWithNoTests": true
           }
         }
       }
@@ -1465,6 +1553,28 @@
           "outputs": ["coverage/libs/shared/util-api-user-registration"],
           "options": {
             "jestConfig": "libs/shared/util-api-user-registration/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-util-asset": {
+      "root": "libs/shared/util-asset",
+      "sourceRoot": "libs/shared/util-asset/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/util-asset/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/util-asset"],
+          "options": {
+            "jestConfig": "libs/shared/util-asset/jest.config.ts",
             "passWithNoTests": true
           }
         }

@@ -4,21 +4,48 @@ import * as t from '@onflow/types'
 import { deployFusd, setupFusdOnAccount } from './fusd'
 import { deployContract, execute, transact } from '../lib/interactions'
 import { FlowAccount } from '@ismedia/shared/util-flow'
-import { blueprintA, blueprintB, blueprintC, deployFrontRow } from './frontrow'
+import {
+  IBlueprintFixture,
+  blueprintA,
+  blueprintB,
+  blueprintC,
+  blueprintD,
+  blueprintE,
+  blueprintF,
+  deployFrontRow,
+} from './frontrow'
 import { getContractAddress } from '@ismedia/shared/data-access-flow'
 
+export interface ISaleOfferFixture {
+  price: number
+  blueprint: IBlueprintFixture
+  blueprintId?: number
+}
+
 // Sale offers
-export const saleOfferA = {
+export const saleOfferA: ISaleOfferFixture = {
   price: 1.0,
-  blueprintId: blueprintA.id,
+  blueprint: blueprintA,
 }
-export const saleOfferB = {
+export const saleOfferB: ISaleOfferFixture = {
   price: 2.5,
-  blueprintId: blueprintB.id,
+  blueprint: blueprintB,
 }
-export const saleOfferC = {
-  price: 5.55,
-  blueprintId: blueprintC.id,
+export const saleOfferC: ISaleOfferFixture = {
+  price: 3.55,
+  blueprint: blueprintC,
+}
+export const saleOfferD: ISaleOfferFixture = {
+  price: 3.55,
+  blueprint: blueprintD,
+}
+export const saleOfferE: ISaleOfferFixture = {
+  price: 8.0,
+  blueprint: blueprintE,
+}
+export const saleOfferF: ISaleOfferFixture = {
+  price: 100.0,
+  blueprint: blueprintF,
 }
 
 /*

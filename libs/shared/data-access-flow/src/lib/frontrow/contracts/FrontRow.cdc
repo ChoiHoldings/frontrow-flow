@@ -513,7 +513,7 @@ pub contract FrontRow: NonFungibleToken {
     // Set paths aliases
     self.CollectionStoragePath = /storage/FrontRowNFTCollection
     self.CollectionPublicPath = /public/FrontRowNFTCollectionPublic
-    self.MinterPrivatePath = /private/MinterPrivate
+    self.MinterPrivatePath = /private/FrontRowMinterPrivate
     self.AdminStoragePath = /storage/FrontRowAdmin
 
     // Create the Admin resource and save it to storage

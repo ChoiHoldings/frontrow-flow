@@ -17,8 +17,10 @@ import {
   blueprintB,
   blueprintC,
   blueprintD,
+  blueprintE,
   getBlueprintsCount,
   getMintCountPerBlueprint,
+  getBlueprintByMetadata,
 } from '../src/utils/frontrow'
 
 import {
@@ -32,6 +34,9 @@ import {
   saleOfferA,
   saleOfferB,
   saleOfferC,
+  saleOfferD,
+  saleOfferE,
+  saleOfferF,
 } from '../src/utils/frontrowStorefront'
 
 import { setupFusdOnAccount, mintFusdToAccount, getBalance } from '../src/utils/fusd'
@@ -46,16 +51,39 @@ let Admin: FlowAccount
 let Eve: FlowAccount
 let Frank: FlowAccount
 
-// Set up blueprints that will be used in this test.
-// The "preMintQuantity" property is a helper which enables pre-minting of NFTs
-// before the tests are executed.
-const blueprints = [
-  { ...blueprintA, preMintQuantity: blueprintA.maxQuantity },
-  { ...blueprintB, preMintQuantity: blueprintB.maxQuantity },
-  { ...blueprintC, preMintQuantity: 0 },
-  { ...blueprintD, preMintQuantity: 0 },
+// Rules to generate test data
+const testData = [
+  {
+    saleOfferFixture: saleOfferA,
+    preMintQuantity: saleOfferA.blueprint.maxQuantity,
+    shouldCreateSaleOffer: true,
+  },
+  {
+    saleOfferFixture: saleOfferB,
+    preMintQuantity: saleOfferB.blueprint.maxQuantity,
+    shouldCreateSaleOffer: true,
+  },
+  {
+    saleOfferFixture: saleOfferC,
+    preMintQuantity: 0,
+    shouldCreateSaleOffer: true,
+  },
+  {
+    saleOfferFixture: saleOfferD,
+    preMintQuantity: 0,
+    shouldCreateSaleOffer: false,
+  },
+  {
+    saleOfferFixture: saleOfferE,
+    preMintQuantity: 0,
+    shouldCreateSaleOffer: true,
+  },
+  {
+    saleOfferFixture: saleOfferF,
+    preMintQuantity: saleOfferF.blueprint.maxQuantity,
+    shouldCreateSaleOffer: true,
+  },
 ]
-const saleOffers = [saleOfferA, saleOfferB, saleOfferC]
 let buyers: { account: FlowAccount; amount: number }[] = []
 
 describe('FrontRowStorefront Contract', () => {
@@ -70,7 +98,7 @@ describe('FrontRowStorefront Contract', () => {
     Frank = await accounts.create(Admin, 'accounts/emulator-account-frank')
     buyers = [
       { account: Eve, amount: 100 },
-      { account: Frank, amount: 100 },
+      { account: Frank, amount: 1000 },
     ]
   })
   beforeEach(async () => {
@@ -116,71 +144,81 @@ describe('FrontRowStorefront Contract', () => {
   })
 
   //
-  it('shall be able to set up blueprints and mint NFTs', async () => {
-    const signers = [Admin]
-    const recipient = Admin
-
-    let totalSupply = 0
-
-    // Create blueprints and mint NFTs
-    for (const blueprint of blueprints) {
-      await shallPass(printBlueprint(blueprint.maxQuantity, blueprint.metadata, signers))
-
-      // Mint NFTs
-      if (blueprint.preMintQuantity != 0) {
-        expect(
-          await shallPass(
-            batchMintNFT(blueprint.id, blueprint.preMintQuantity, recipient, signers),
-          ),
-        )
-        totalSupply += blueprint.preMintQuantity
-      }
-    }
-
-    // Check if total blueprints count is correct
-    const blueprintsCount = await getBlueprintsCount()
-    expect(blueprintsCount).toBe(blueprints.length)
-
-    // Check if total number of minted NFTs is correct
-    const totalNftCount = await getTotalSupply()
-    expect(totalNftCount).toBe(totalSupply)
-  })
-
-  //
   describe('Admin sale offers management', () => {
     //
-    it('shall be able to create sale offers', async () => {
-      // Create sale offers
-      for (const saleOffer of saleOffers) {
-        const price = toUFix64(saleOffer.price)
+    it('shall be able to print blueprints and create sale offers', async () => {
+      const signers = [Admin]
+      const recipient = Admin
 
-        const transactionResult = await shallPass(
-          createSaleOffer(Admin, saleOffer.blueprintId, price),
-        )
+      // Keep the total count for later verification
+      let totalSupply = 0
 
-        const saleOfferData = transactionResult.events[0].data
+      //
+      for (const el of testData) {
+        const { saleOfferFixture, preMintQuantity, shouldCreateSaleOffer } = el
+        const blueprintFixture = saleOfferFixture.blueprint
+        const { maxQuantity, metadata } = blueprintFixture
 
-        // Check if correct event has been emitted
-        expect(transactionResult).toEmit([
-          {
-            type: 'FrontRowStorefront.SaleOfferAvailable',
-          },
-        ])
+        // Print the corresponding blueprint
+        await shallPass(printBlueprint(maxQuantity, metadata, signers))
 
-        // Check emitted event data
-        expect(saleOfferData).toMatchObject({
-          storefrontAddress: Admin.address,
-          blueprintId: saleOffer.blueprintId,
-          price,
-        })
+        // Get printed blueprint with the actual ID
+        const blueprint = await getBlueprintByMetadata('title', metadata.title)
+
+        // Mint NFTs
+        if (preMintQuantity != 0) {
+          expect(
+            await shallPass(
+              batchMintNFT(blueprint.id, preMintQuantity, recipient, signers),
+            ),
+          )
+          totalSupply += preMintQuantity
+        }
+
+        // Create a sale offer if the "create" flag is set to true
+        if (shouldCreateSaleOffer) {
+          const price = toUFix64(saleOfferFixture.price)
+
+          // Create a sale offer
+          const createSaleOfferTxResult = await shallPass(
+            createSaleOffer(Admin, blueprint.id, price),
+          )
+
+          // Check if correct event has been emitted
+          expect(createSaleOfferTxResult).toEmit([
+            {
+              type: 'FrontRowStorefront.SaleOfferAvailable',
+            },
+          ])
+
+          // Check emitted event data
+          expect(createSaleOfferTxResult.events[0].data).toMatchObject({
+            storefrontAddress: Admin.address,
+            blueprintId: blueprint.id,
+            price,
+          })
+        }
+
+        // Set the blueprintId on the saleOfferFixture
+        saleOfferFixture.blueprintId = blueprint.id
       }
+
+      // Check the total blueprints count
+      const blueprintsCount = await getBlueprintsCount()
+      expect(blueprintsCount).toBe(testData.length)
+
+      // Check the total number of minted NFTs
+      const totalNftCount = await getTotalSupply()
+      expect(totalNftCount).toBe(totalSupply)
     })
 
     //
     it('shall have the correct number of sale offers listed for sale', async () => {
       //
       const totalSaleOffers = await getSaleOffersCount(Admin)
-      expect(totalSaleOffers).toBe(saleOffers.length)
+      expect(totalSaleOffers).toBe(
+        testData.filter((el) => el.shouldCreateSaleOffer).length,
+      )
     })
 
     //
@@ -198,15 +236,17 @@ describe('FrontRowStorefront Contract', () => {
         blueprintId: saleOfferA.blueprintId,
         owner: Admin.address,
         price: saleOfferA.price,
+        sold: 0,
       })
     })
 
     //
     it('shall not be able to create a duplicate sale offer', async () => {
       const price = toUFix64(saleOfferA.price)
+      const blueprintId = saleOfferA.blueprintId || 0
 
       // Try creating a duplicate sale offer for a blueprint which is already on sale
-      await expect(createSaleOffer(Admin, saleOfferA.blueprintId, price)).rejects.toMatch(
+      await expect(createSaleOffer(Admin, blueprintId, price)).rejects.toMatch(
         'Sale offer already exists.',
       )
       expect.assertions(1)
@@ -223,12 +263,13 @@ describe('FrontRowStorefront Contract', () => {
       // Check the Admin and Eve balances before the purchase
       const beforeAdminBalance = await getBalance(Admin)
       const beforeEveBalance = await getBalance(Eve)
+      const blueprintId = saleOfferA.blueprintId || 0
 
       // Get NFT that will be sold first
-      const nftForSale = await getFrontRowNFTByBlueprint(Admin, saleOfferA.blueprintId, 1)
+      const nftForSale = await getFrontRowNFTByBlueprint(Admin, blueprintId, 1)
       nftId = nftForSale.id
 
-      const buyNftTxResult = await shallPass(buyNFT(Eve, saleOfferA.blueprintId))
+      const buyNftTxResult = await shallPass(buyNFT(Eve, blueprintId))
       const listedPriceUFix64 = toUFix64(saleOfferA.price)
 
       // Check transaction details in the emitted event
@@ -291,16 +332,19 @@ describe('FrontRowStorefront Contract', () => {
     //
     it('shall not be able to purchase NFTs when they are sold out', async () => {
       //
-      await expect(buyNFT(Eve, saleOfferA.blueprintId)).rejects.toMatch(
-        'NFTs are sold out.',
-      )
+      const blueprintId = saleOfferA.blueprintId || 0
+      await expect(buyNFT(Eve, blueprintId)).rejects.toMatch('NFTs are sold out.')
       expect.assertions(1)
     })
 
     //
     it('shall not be able to purchase NFTs for a blueprint which is not on sale', async () => {
       //
-      await expect(buyNFT(Eve, blueprintD.id)).rejects.toMatch(
+      const { id: blueprintId } = await getBlueprintByMetadata(
+        'title',
+        blueprintD.metadata.title,
+      )
+      await expect(buyNFT(Eve, blueprintId)).rejects.toMatch(
         'No Sale Offer with that ID in Storefront.',
       )
       expect.assertions(1)
@@ -314,15 +358,20 @@ describe('FrontRowStorefront Contract', () => {
 
       // Get ID of the NFT that should be sold next
       const sellerCollectionIDsBefore = await getCollectionIDs(Admin)
-      const nextNftId =
-        sellerCollectionIDsBefore[sellerCollectionIDsBefore.length - 1] + 1
+      const totalSupply = await getTotalSupply()
+      const nextNftId = totalSupply + 1
+
+      const { id: blueprintId } = await getBlueprintByMetadata(
+        'title',
+        blueprintC.metadata.title,
+      )
 
       // There shouldn't be any pre-minted NFTs for this blueprint
-      const mintCount = await getMintCountPerBlueprint(saleOfferC.blueprintId)
+      const mintCount = await getMintCountPerBlueprint(blueprintId)
       expect(mintCount).toBe(0)
 
       // Since there are no pre-minted NFTs, the purchased NFT should be minted on the fly
-      const buyNftTxResult = await shallPass(buyNFT(Eve, saleOfferC.blueprintId))
+      const buyNftTxResult = await shallPass(buyNFT(Eve, blueprintId))
       const listedPriceUFix64 = toUFix64(saleOfferC.price)
 
       // Check transaction details in the emitted event
@@ -342,7 +391,7 @@ describe('FrontRowStorefront Contract', () => {
         },
         {
           type: 'FrontRowStorefront.Purchase',
-          data: { blueprintId: saleOfferC.blueprintId, sold: 1, soldOut: false },
+          data: { blueprintId, sold: 1, soldOut: false },
         },
         {
           type: 'FrontRow.Deposit',
@@ -368,8 +417,54 @@ describe('FrontRowStorefront Contract', () => {
       expect(sellerCollectionIDsBefore).toEqual(sellerCollectionIDsAfter)
 
       // The mint count should be 1
-      const mintCountAfter = await getMintCountPerBlueprint(saleOfferC.blueprintId)
+      const mintCountAfter = await getMintCountPerBlueprint(blueprintId)
       expect(mintCountAfter).toBe(1)
+    })
+
+    //
+    it('shall not be able to purchase over `maxQuantity` NFTs while minting on demand', async () => {
+      const beforeAdminBalance = parseFloat(await getBalance(Admin))
+      const beforeEveBalance = parseFloat(await getBalance(Eve))
+
+      const { id: blueprintId, maxQuantity } = await getBlueprintByMetadata(
+        'title',
+        blueprintE.metadata.title,
+      )
+      const overMaxQuantity = maxQuantity + 1 // Try purchasing over maxQuantity limit
+
+      // Buy all NFTs from Blueprint E
+      for (let i = 0; i < overMaxQuantity; i += 1) {
+        if (i < maxQuantity) {
+          await shallPass(buyNFT(Eve, blueprintId))
+        } else {
+          await expect(buyNFT(Eve, blueprintId)).rejects.toMatch('NFTs are sold out.')
+        }
+      }
+
+      const expectedAdminBalance = beforeAdminBalance + saleOfferE.price * maxQuantity
+      const expectedEveBalance = beforeEveBalance - saleOfferE.price * maxQuantity
+
+      const afterAdminBalance = await getBalance(Admin)
+      const afterEveBalance = await getBalance(Eve)
+
+      // Make sure the purchase has been reflected correctly in balances of both parties
+      expect(afterAdminBalance).toBe(toUFix64(expectedAdminBalance))
+      expect(afterEveBalance).toBe(toUFix64(expectedEveBalance))
+    })
+
+    //
+    it('shall not be able to purchase with insufficient funds to cover the NFT price', async () => {
+      // Check the Admin and Eve balances before the purchase
+      const balanceEve = await getBalance(Eve)
+      const blueprintId = saleOfferF.blueprintId || 0
+
+      // Make sure Eve's balance can't cover the price of the NFT
+      expect(parseFloat(balanceEve)).toBeLessThan(saleOfferF.price)
+
+      // Try purchasing NFT without enough funds to cover the price
+      await expect(buyNFT(Eve, blueprintId)).rejects.toMatch(
+        'Amount withdrawn must be less than or equal than the balance of the Vault',
+      )
     })
   })
 
@@ -379,12 +474,13 @@ describe('FrontRowStorefront Contract', () => {
     it('shall be able to purchase `maxQuantity` NFTs of Blueprint B', async () => {
       const beforeAdminBalance = parseFloat(await getBalance(Admin))
       const beforeEveBalance = parseFloat(await getBalance(Eve))
+      const blueprintId = saleOfferB.blueprintId || 0
 
       const { maxQuantity } = blueprintB
 
       // Buy all NFTs from Blueprint B
       for (let i = 0; i < maxQuantity; i += 1) {
-        await shallPass(buyNFT(Eve, saleOfferB.blueprintId))
+        await shallPass(buyNFT(Eve, blueprintId))
       }
 
       const expectedAdminBalance = beforeAdminBalance + saleOfferB.price * maxQuantity
@@ -400,9 +496,8 @@ describe('FrontRowStorefront Contract', () => {
 
     it('shall not be able to purchase more than `maxQuantity` NFTs', async () => {
       //
-      await expect(buyNFT(Eve, saleOfferB.blueprintId)).rejects.toMatch(
-        'NFTs are sold out.',
-      )
+      const blueprintId = saleOfferB.blueprintId || 0
+      await expect(buyNFT(Eve, blueprintId)).rejects.toMatch('NFTs are sold out.')
       expect.assertions(1)
     })
   })
@@ -411,17 +506,19 @@ describe('FrontRowStorefront Contract', () => {
   describe('Non-admin user access', () => {
     //
     it('shall not be able to create a sale offer', async () => {
+      const blueprintId = saleOfferB.blueprintId || 0
       // Try creating a sale offer
       await expect(
-        createSaleOffer(Eve, saleOfferB.blueprintId, toUFix64(saleOfferB.price)),
+        createSaleOffer(Eve, blueprintId, toUFix64(saleOfferB.price)),
       ).rejects.toMatch('Missing or mis-typed Storefront.')
       expect.assertions(1)
     })
 
     //
     it('shall not be able to remove a sale offer', async () => {
+      const blueprintId = saleOfferB.blueprintId || 0
       // Try removing a sale offer
-      await expect(removeSaleOffer(Eve, saleOfferB.blueprintId)).rejects.toMatch(
+      await expect(removeSaleOffer(Eve, blueprintId)).rejects.toMatch(
         'Missing or mis-typed Storefront.',
       )
       expect.assertions(1)
@@ -450,9 +547,10 @@ describe('FrontRowStorefront Contract', () => {
       //
       const thief: FlowAccount = Frank
       const storefrontOwner: FlowAccount = Admin
+      const blueprintId = saleOfferC.blueprintId || 0
 
       await expect(
-        stealNftFromStorefront(blueprintC.id, storefrontOwner, thief),
+        stealNftFromStorefront(blueprintId, storefrontOwner, thief),
       ).rejects.toMatch("Couldn't borrow Storefront from provided address")
 
       expect.assertions(1)
@@ -465,13 +563,14 @@ describe('FrontRowStorefront Contract', () => {
     it('shall be able to remove a sold out sale offer', async () => {
       const saleOffers = await getSaleOffers(Admin)
       const saleOffersCountBefore = saleOffers.length
+      const blueprintId = saleOfferA.blueprintId || 0
 
       // Remove saleOfferA (sold out)
-      expect(await shallPass(removeSaleOffer(Admin, saleOfferA.blueprintId))).toEmit([
+      expect(await shallPass(removeSaleOffer(Admin, blueprintId))).toEmit([
         {
           type: 'FrontRowStorefront.SaleOfferRemoved',
           data: {
-            blueprintId: saleOfferA.blueprintId,
+            blueprintId: blueprintId,
             sold: blueprintA.maxQuantity,
             soldOut: true,
           },
@@ -487,9 +586,10 @@ describe('FrontRowStorefront Contract', () => {
     it('shall be able to remove a sale offer which still has NFTs for sale', async () => {
       const saleOffers = await getSaleOffers(Admin)
       const saleOffersCountBefore = saleOffers.length
+      const blueprintId = saleOfferC.blueprintId || 0
 
       // Remove saleOfferC (not sold out yet)
-      expect(await shallPass(removeSaleOffer(Admin, saleOfferC.blueprintId))).toEmit([
+      expect(await shallPass(removeSaleOffer(Admin, blueprintId))).toEmit([
         {
           type: 'FrontRowStorefront.SaleOfferRemoved',
           data: {
@@ -507,15 +607,15 @@ describe('FrontRowStorefront Contract', () => {
 
     //
     it('shall not be able to remove a non-existent sale offer', async () => {
-      const nonExistentBlueprintId = 1234567890
-
       // For non-existent blueprint
+      const nonExistentBlueprintId = 1234567890
       await expect(removeSaleOffer(Admin, nonExistentBlueprintId)).rejects.toMatch(
         "Blueprint doesn't exist",
       )
 
       // For existent blueprint
-      await expect(removeSaleOffer(Admin, blueprintD.id)).rejects.toMatch(
+      const blueprintId = saleOfferD.blueprintId || 0
+      await expect(removeSaleOffer(Admin, blueprintId)).rejects.toMatch(
         'Missing sale offer.',
       )
       expect.assertions(2)

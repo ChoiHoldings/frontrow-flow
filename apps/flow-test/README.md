@@ -12,6 +12,17 @@
 
 **SaleOffer** - A resource that represents a sale on the FrontRow platform. Sale offers are created for blueprints (not individual NFTs) and they keep track of how many NFTs of a specific blueprint have been sold.
 
+**Metadata** - A blueprint property that stores detailed description of each blueprint in the key/value format.
+The blueprints are publicly accessible so anyone can read the metadata associated with them. Here is an example
+of metadata for 3 different blueprints:
+
+| Artist    | Title               | Uri                                  |
+| --------- | :------------------ | :----------------------------------- |
+| BTS       | Permission to Dance | https://api.frontrow.kr/blueprints/1 |
+| Exo       | Obsession           | https://api.frontrow.kr/blueprints/2 |
+| BLACKPINK | How You Like That   | https://api.frontrow.kr/blueprints/3 |
+
+<br>
 ## Contracts Overview
 
 The FrontRow Flow contracts serve the following purposes for the platform:

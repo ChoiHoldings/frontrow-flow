@@ -21,6 +21,7 @@
     "strictPropertyInitialization": false,
     "paths": {
       "@frontrow-contracts/*": ["libs/shared/data-access-flow/src/lib/frontrow/*"],
+      "@ismedia/api/data-access-asset": ["libs/api/data-access-asset/src/index.ts"],
       "@ismedia/api/data-access-blueprint": [
         "libs/api/data-access-blueprint/src/index.ts"
       ],
@@ -63,6 +64,7 @@
       "@ismedia/api/domain-user-registration": [
         "libs/api/domain-user-registration/src/index.ts"
       ],
+      "@ismedia/api/feature-asset": ["libs/api/feature-asset/src/index.ts"],
       "@ismedia/api/feature-blueprint": ["libs/api/feature-blueprint/src/index.ts"],
       "@ismedia/api/feature-celebrity": ["libs/api/feature-celebrity/src/index.ts"],
       "@ismedia/api/feature-collector": ["libs/api/feature-collector/src/index.ts"],
@@ -87,6 +89,7 @@
       "@ismedia/api/util-app-config": ["libs/api/util-app-config/src/index.ts"],
       "@ismedia/api/util-auth": ["libs/api/util-auth/src/index.ts"],
       "@ismedia/api/util-aws": ["libs/api/util-aws/src/index.ts"],
+      "@ismedia/api/util-aws-s3": ["libs/api/util-aws-s3/src/index.ts"],
       "@ismedia/api/util-aws-ses": ["libs/api/util-aws-ses/src/index.ts"],
       "@ismedia/api/util-crypto": ["libs/api/util-crypto/src/index.ts"],
       "@ismedia/api/util-forgot-password": ["libs/api/util-forgot-password/src/index.ts"],
@@ -94,6 +97,7 @@
       "@ismedia/apps/api": ["apps/api/src/app/app.module.ts"],
       "@ismedia/apps/flow": ["apps/flow/src"],
       "@ismedia/shared/data-access-flow": ["libs/shared/data-access-flow/src/index.ts"],
+      "@ismedia/shared/util-api-asset": ["libs/shared/util-api-asset/src/index.ts"],
       "@ismedia/shared/util-api-auth": ["libs/shared/util-api-auth/src/index.ts"],
       "@ismedia/shared/util-api-blueprint": [
         "libs/shared/util-api-blueprint/src/index.ts"
@@ -126,6 +130,7 @@
       "@ismedia/shared/util-api-user-registration": [
         "libs/shared/util-api-user-registration/src/index.ts"
       ],
+      "@ismedia/shared/util-asset": ["libs/shared/util-asset/src/index.ts"],
       "@ismedia/shared/util-auth": ["libs/shared/util-auth/src/index.ts"],
       "@ismedia/shared/util-blueprint": ["libs/shared/util-blueprint/src/index.ts"],
       "@ismedia/shared/util-celebrity": ["libs/shared/util-celebrity/src/index.ts"],

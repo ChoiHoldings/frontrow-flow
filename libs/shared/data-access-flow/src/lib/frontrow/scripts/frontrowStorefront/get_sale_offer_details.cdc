@@ -6,11 +6,13 @@ pub struct SaleOfferDetails {
   pub let blueprintId: UInt32
   pub let owner: Address
   pub let price: UFix64
+  pub let sold: UInt32
 
-  init(blueprintId: UInt32, owner: Address, price: UFix64) {
+  init(blueprintId: UInt32, owner: Address, price: UFix64, sold: UInt32) {
     self.blueprintId = blueprintId
     self.owner = owner
     self.price = price
+    self.sold = sold
   }
 }
 
@@ -25,9 +27,9 @@ pub fun main(address: Address, blueprintId: UInt32): SaleOfferDetails? {
         return SaleOfferDetails(
           blueprintId: details.blueprintId,
           owner: address,
-          price: details.price
+          price: details.price,
+          sold: details.sold
         )
-
       }
     }
   }

@@ -30,6 +30,9 @@
     "api": {
       "tags": ["scope:api", "type:app"]
     },
+    "api-data-access-asset": {
+      "tags": ["scope:api", "type:data-access"]
+    },
     "api-data-access-blueprint": {
       "tags": ["scope:api", "type:data-access"]
     },
@@ -102,6 +105,9 @@
     "api-domain-user-registration": {
       "tags": ["scope:api", "type:domain"]
     },
+    "api-feature-asset": {
+      "tags": ["scope:api", "type:feature"]
+    },
     "api-feature-blueprint": {
       "tags": ["scope:api", "type:feature"]
     },
@@ -156,6 +162,9 @@
     "api-util-aws": {
       "tags": ["scope:api", "type:util"]
     },
+    "api-util-aws-s3": {
+      "tags": ["scope:api", "type:util"]
+    },
     "api-util-aws-ses": {
       "tags": ["scope:api", "type:util"]
     },
@@ -175,6 +184,9 @@
       "tags": ["scope:e2e", "type:app"]
     },
     "shared-data-access-flow": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-api-asset": {
       "tags": ["scope:shared", "type:util"]
     },
     "shared-util-api-auth": {
@@ -223,6 +235,9 @@
       "tags": ["scope:shared", "type:util"]
     },
     "shared-util-api-user-registration": {
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-asset": {
       "tags": ["scope:shared", "type:util"]
     },
     "shared-util-auth": {

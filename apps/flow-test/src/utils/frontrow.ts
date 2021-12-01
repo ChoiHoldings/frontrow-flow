@@ -4,28 +4,26 @@ import { FlowAccount, toUFix64 } from '@ismedia/shared/util-flow'
 import { deployContract, transact, execute } from '../lib/interactions'
 import { mintFlow } from '../lib/flow'
 
-export interface FrontrowNftMetadata {
+export interface IBlueprintMetadata {
   artist: string
   title: string
 }
 
-export interface FrontrowBlueprintData {
-  id: number
+export interface IBlueprintFixture {
+  id?: number
   maxQuantity: number
-  metadata: FrontrowNftMetadata
+  metadata: IBlueprintMetadata
 }
 
 // Blueprints
-export const blueprintA = {
-  id: 1,
+export const blueprintA: IBlueprintFixture = {
   maxQuantity: 1,
   metadata: {
     artist: 'BTS',
     title: 'Permission to Dance',
   },
 }
-export const blueprintB = {
-  id: 2,
+export const blueprintB: IBlueprintFixture = {
   maxQuantity: 2,
   metadata: {
     artist: 'Exo',
@@ -33,8 +31,7 @@ export const blueprintB = {
   },
 }
 
-export const blueprintC = {
-  id: 3,
+export const blueprintC: IBlueprintFixture = {
   maxQuantity: 5,
   metadata: {
     artist: 'BLACKPINK',
@@ -42,16 +39,39 @@ export const blueprintC = {
   },
 }
 
-export const blueprintD = {
-  id: 4,
-  maxQuantity: 200,
+export const blueprintD: IBlueprintFixture = {
+  maxQuantity: 3,
   metadata: {
     artist: 'ITZY',
     title: 'WANNABE',
   },
 }
 
-const metadataToArg = (metadata: FrontrowNftMetadata): Argument => {
+export const blueprintE: IBlueprintFixture = {
+  maxQuantity: 2,
+  metadata: {
+    artist: 'UI',
+    title: 'Celebrity',
+  },
+}
+
+export const blueprintF: IBlueprintFixture = {
+  maxQuantity: 5,
+  metadata: {
+    artist: 'BTS',
+    title: 'Butter',
+  },
+}
+
+export const blueprintX: IBlueprintFixture = {
+  maxQuantity: 300,
+  metadata: {
+    artist: 'iKON',
+    title: 'LOVE SCENARIO',
+  },
+}
+
+const metadataToArg = (metadata: IBlueprintMetadata): Argument => {
   return arg(
     [
       { key: 'artist', value: metadata.artist },
@@ -142,6 +162,18 @@ export const getBlueprint = (blueprintId: number) => {
 }
 
 /*
+ * Returns a **Blueprint**.
+ * @throws Will throw an error if execution will be halted
+ * @returns {FrontRow.Blueprint}
+ * */
+export const getBlueprintByMetadata = (metadataField: string, metadataValue: string) => {
+  const name = 'frontrow/get_blueprint_by_metadata'
+  const args = [arg(metadataField, t.String), arg(metadataValue, t.String)]
+
+  return execute(name, args)
+}
+
+/*
  * Returns the total number of NFTs minted for a blueprint.
  * @param {UInt32} BlueprintID - blueprint id
  * @throws Will throw an error if execution will be halted
@@ -164,7 +196,7 @@ export const getMintCountPerBlueprint = (blueprintId: number) => {
  * */
 export const printBlueprint = async (
   maxQuantity: number,
-  metadata: FrontrowNftMetadata,
+  metadata: IBlueprintMetadata,
   signers: FlowAccount[],
 ) => {
   const name = 'frontrow/print_blueprint'

@@ -21,7 +21,9 @@ import {
   blueprintB,
   blueprintC,
   blueprintD,
+  blueprintX,
   getFrontRowNFT,
+  getBlueprintByMetadata,
 } from '../src/utils/frontrow'
 
 // We need to set timeout for a higher number, because some transactions might take up some time
@@ -78,7 +80,7 @@ describe('FrontRow Contract', () => {
   describe('Blueprint A - maxQuantity reached', () => {
     //
     it('shall be able to print a new Blueprint', async () => {
-      const { id, maxQuantity, metadata } = blueprintA
+      const { maxQuantity, metadata } = blueprintA
 
       const countBefore = await getBlueprintsCount()
       // Create a new Blueprint
@@ -86,14 +88,14 @@ describe('FrontRow Contract', () => {
         {
           type: 'FrontRow.BlueprintPrinted',
           data: {
-            id,
+            id: 1,
             maxQuantity,
           },
         },
       ])
       const countAfter = await getBlueprintsCount()
 
-      // Check if total number of blueprints changed
+      // Make sure the total number of blueprints increased by 1
       expect(countBefore + 1).toBe(countAfter)
     })
 
@@ -108,7 +110,10 @@ describe('FrontRow Contract', () => {
     //
     it('shall be able to mint one NFT from a Blueprint', async () => {
       //
-      const { id: blueprintId } = blueprintA
+      const { id: blueprintId } = await getBlueprintByMetadata(
+        'title',
+        blueprintA.metadata.title,
+      )
       const recipient = Admin
 
       // Make sure NFT minting was successful and the correct events were emitted
@@ -142,8 +147,9 @@ describe('FrontRow Contract', () => {
     //
     it('shall not be able to mint any more NFTs - max quantity reached', async () => {
       const recipient = Admin
+      const { id } = await getBlueprintByMetadata('title', blueprintA.metadata.title)
 
-      await expect(mintNFT(blueprintA.id, recipient, [Admin])).rejects.toMatch(
+      await expect(mintNFT(id, recipient, [Admin])).rejects.toMatch(
         'maximum quantity limit is reached',
       )
       expect.assertions(1)
@@ -175,11 +181,13 @@ describe('FrontRow Contract', () => {
   describe('Blueprint B - batch mint', () => {
     //
     it('shall be able to print another Blueprint', async () => {
-      const { id, maxQuantity, metadata } = blueprintB
+      const { maxQuantity, metadata } = blueprintB
       const countBefore = await getBlueprintsCount()
+      const txPrintBlueprint = await printBlueprint(maxQuantity, metadata, [Admin])
+      const { id } = await getBlueprintByMetadata('title', blueprintB.metadata.title)
 
       // Create another Blueprint
-      expect(await shallPass(printBlueprint(maxQuantity, metadata, [Admin]))).toEmit([
+      expect(txPrintBlueprint).toEmit([
         {
           type: 'FrontRow.BlueprintPrinted',
           data: {
@@ -194,13 +202,17 @@ describe('FrontRow Contract', () => {
 
     //
     it('shall have the mint count 0 if no NFTs were minted from a Blueprint', async () => {
-      const mintCount = await getMintCountPerBlueprint(blueprintB.id)
+      const { id } = await getBlueprintByMetadata('title', blueprintB.metadata.title)
+      const mintCount = await getMintCountPerBlueprint(id)
       expect(mintCount).toBe(0)
     })
 
     //
     it('shall be able to batch mint NFTs from the enabled Blueprint', async () => {
-      const { id: blueprintId, maxQuantity } = blueprintB
+      const { id: blueprintId, maxQuantity } = await getBlueprintByMetadata(
+        'title',
+        blueprintB.metadata.title,
+      )
       const recipient = Admin
 
       // Make sure the correct events were emitted
@@ -223,11 +235,14 @@ describe('FrontRow Contract', () => {
 
     //
     it('shall have the correct mint count after batch mint', async () => {
-      const mintCount = await getMintCountPerBlueprint(blueprintB.id)
-      const quantity = blueprintB.maxQuantity
+      const { id, maxQuantity } = await getBlueprintByMetadata(
+        'title',
+        blueprintB.metadata.title,
+      )
+      const mintCount = await getMintCountPerBlueprint(id)
 
-      expect(mintCount).toBe(quantity)
-      TOTAL_SUPPLY = TOTAL_SUPPLY + quantity
+      expect(mintCount).toBe(maxQuantity)
+      TOTAL_SUPPLY = TOTAL_SUPPLY + maxQuantity
     })
 
     //
@@ -242,8 +257,9 @@ describe('FrontRow Contract', () => {
     //
     it('shall be able to cancel a Blueprint', async () => {
       // Print a blueprint first
-      const { id, maxQuantity, metadata } = blueprintC
+      const { maxQuantity, metadata } = blueprintC
       await shallPass(printBlueprint(maxQuantity, metadata, [Admin]))
+      const { id } = await getBlueprintByMetadata('title', blueprintC.metadata.title)
 
       // Make sure the correct event was emitted
       expect(await shallPass(cancelBlueprint(id, [Admin]))).toEmit([
@@ -259,7 +275,8 @@ describe('FrontRow Contract', () => {
     //
     it('shall set corresponding flag to true on the cancelled Blueprint', async () => {
       const blueprints = await getBlueprints()
-      const isCancelled = blueprints[blueprintC.id].cancelled
+      const { id } = await getBlueprintByMetadata('title', blueprintC.metadata.title)
+      const isCancelled = blueprints[id].cancelled
 
       // Make sure the flag was set correctly
       expect(isCancelled).toBe(true)
@@ -268,8 +285,9 @@ describe('FrontRow Contract', () => {
     //
     it('shall not be able to mint NFTs for the cancelled Blueprint', async () => {
       const recipient = Admin
+      const { id } = await getBlueprintByMetadata('title', blueprintC.metadata.title)
 
-      await expect(mintNFT(blueprintC.id, recipient, [Admin])).rejects.toMatch(
+      await expect(mintNFT(id, recipient, [Admin])).rejects.toMatch(
         'blueprint is cancelled.',
       )
       expect.assertions(1)
@@ -325,7 +343,7 @@ describe('FrontRow Contract', () => {
 
     //
     it('shall not be able to cancel a Blueprint', async () => {
-      const { id } = blueprintB
+      const { id } = await getBlueprintByMetadata('title', blueprintB.metadata.title)
       const signers = [Eve]
 
       await expect(cancelBlueprint(id, signers)).rejects.toMatch(
@@ -337,7 +355,10 @@ describe('FrontRow Contract', () => {
     //
     it('shall not be able to mint one NFT from a Blueprint', async () => {
       //
-      const { id: blueprintId } = blueprintA
+      const { id: blueprintId } = await getBlueprintByMetadata(
+        'title',
+        blueprintA.metadata.title,
+      )
 
       const recipient = Eve
       const signers = [Eve]
@@ -350,7 +371,10 @@ describe('FrontRow Contract', () => {
 
     //
     it('shall not be able to batch mint NFTs', async () => {
-      const { id: blueprintId } = blueprintB
+      const { id: blueprintId } = await getBlueprintByMetadata(
+        'title',
+        blueprintB.metadata.title,
+      )
 
       const recipient = Eve
       const signers = [Eve]
@@ -359,6 +383,59 @@ describe('FrontRow Contract', () => {
         'Could not borrow a reference to the Admin.',
       )
       expect.assertions(1)
+    })
+  })
+
+  //
+  describe('Computational limits', () => {
+    //
+    it('shall not be able to batch mint over specific max at once', async () => {
+      const { maxQuantity, metadata } = blueprintX
+
+      const countBefore = await getBlueprintsCount()
+      // Create a new Blueprint
+      expect(await shallPass(printBlueprint(maxQuantity, metadata, [Admin]))).toEmit([
+        {
+          type: 'FrontRow.BlueprintPrinted',
+        },
+      ])
+      const countAfter = await getBlueprintsCount()
+
+      // Make sure the total number of blueprints increased by 1
+      expect(countBefore + 1).toBe(countAfter)
+
+      // Get the id of the blueprintX
+      const { id: blueprintId } = await getBlueprintByMetadata(
+        'title',
+        blueprintX.metadata.title,
+      )
+
+      // Try batch minting a large number of NFTs at once
+      const recipient = Admin
+      const MAX_MINT_QUANTITY_AT_ONCE = 220
+
+      // Expect the system to complaint about exceeding the computational limits
+      await expect(
+        batchMintNFT(blueprintId, MAX_MINT_QUANTITY_AT_ONCE, recipient, [Admin]),
+      ).rejects.toMatch('computation limited exceeded')
+    })
+  })
+
+  //
+  describe('Internal scripts', () => {
+    //
+    it('shall return a blueprint for provided metadata', async () => {
+      const { metadata } = blueprintA
+      const blueprint = await getBlueprintByMetadata('title', metadata.title)
+
+      expect(blueprint.metadata.title).toBe(metadata.title)
+    })
+
+    //
+    it('shall return null for a bogus metadata', async () => {
+      const blueprint = await getBlueprintByMetadata('title', 'bogus title')
+
+      expect(blueprint).toBe(null)
     })
   })
 })
