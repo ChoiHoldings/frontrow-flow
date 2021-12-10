@@ -31,9 +31,9 @@
       the funds get sent.
 **/
 
-import FungibleToken from "./FungibleToken.cdc"
-import FUSD from "./FUSD.cdc"
-import NonFungibleToken from "./NonFungibleToken.cdc"
+import FungibleToken from 0xf233dcee88fe0abe
+import FUSD from 0x3c5959b568896393
+import NonFungibleToken from 0x1d7e57aa55817448
 import FrontRow from "./FrontRow.cdc"
 
 pub contract FrontRowStorefront {

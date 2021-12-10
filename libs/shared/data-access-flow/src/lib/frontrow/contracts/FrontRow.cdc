@@ -1,7 +1,7 @@
 /*
   Description: Central Smart Contract for FrontRow dapp
 
-  This smart contract contains the core functionality for 
+  This smart contract contains the core functionality for
   FrontRow, created by Choi Holdings
 
   The contract manages the data associated with blueprints
@@ -13,8 +13,8 @@
   Only the admin resource has the power to do all of the important actions
   in the smart contract such as manage blueprints and mint NFTs.
 
-  The contract also defines a Collection resource. This is an object that 
-  every FrontRow NFT owner will store in their account to manage their 
+  The contract also defines a Collection resource. This is an object that
+  every FrontRow NFT owner will store in their account to manage their
   NFT collection.
 
   The main FrontRow account will also have its own NFT collection
@@ -22,12 +22,12 @@
 
   Note: All state changing functions will panic if an invalid argument is
   provided or one of its pre-conditions or post conditions aren't met.
-  Functions that don't modify state will simply return 0 or nil 
+  Functions that don't modify state will simply return 0 or nil
   and those cases need to be handled by the caller.
 */
 
-import FungibleToken from "./FungibleToken.cdc"
-import NonFungibleToken from "./NonFungibleToken.cdc"
+import FungibleToken from 0xf233dcee88fe0abe
+import NonFungibleToken from 0x1d7e57aa55817448
 
 pub contract FrontRow: NonFungibleToken {
 
