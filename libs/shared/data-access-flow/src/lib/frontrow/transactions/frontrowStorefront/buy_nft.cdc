@@ -12,6 +12,29 @@ transaction(blueprintId: UInt32, storefrontAddress: Address) {
   let saleOffer: &FrontRowStorefront.SaleOffer{FrontRowStorefront.SaleOfferPublic}
 
   prepare(account: AuthAccount) {
+
+    // if the account doesn't already have a collection
+    if account.borrow<&FrontRow.Collection>(from: FrontRow.CollectionStoragePath) == nil {
+
+      // create a new empty collection
+      let collection <- FrontRow.createEmptyCollection()
+
+      // save it to the account
+      account.save(<-collection, to: FrontRow.CollectionStoragePath)
+
+      // create a public capability for the collection
+      account.link<
+        &FrontRow.Collection{NonFungibleToken.CollectionPublic, FrontRow.CollectionPublic}
+      >(
+        FrontRow.CollectionPublicPath,
+        target: FrontRow.CollectionStoragePath
+      )
+    }
+
+    self.frontrowCollection = account.borrow<&FrontRow.Collection{NonFungibleToken.Receiver}>(
+      from: FrontRow.CollectionStoragePath
+    ) ?? panic("Can't borrow FrontRow collection receiver from account.")
+
     self.storefront = getAccount(storefrontAddress)
       .getCapability<&FrontRowStorefront.Storefront{FrontRowStorefront.StorefrontPublic}>(
           FrontRowStorefront.StorefrontPublicPath
@@ -29,10 +52,6 @@ transaction(blueprintId: UInt32, storefrontAddress: Address) {
       ?? panic("Can't borrow FUSD vault from account storage.")
 
     self.paymentVault <- (mainFUSDVault.withdraw(amount: price) as! @FUSD.Vault)
-
-    self.frontrowCollection = account.borrow<&FrontRow.Collection{NonFungibleToken.Receiver}>(
-      from: FrontRow.CollectionStoragePath
-    ) ?? panic("Can't borrow FrontRow collection receiver from account.")
   }
 
   execute {

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blockchain-emulator
+  labels:
+    component: blockchain-emulator
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: blockchain-emulator
+      tier: backend
+  template:
+    metadata:
+      labels:
+        component: blockchain-emulator
+        tier: backend
+    spec:
+      containers:
+        - name: blockchain-emulator
+          image: blockchain-emulator
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 7000
+              name: http
+            - containerPort: 3002
+              name: reset

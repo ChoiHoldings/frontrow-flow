@@ -52,6 +52,9 @@ const packageSubset = ({
   const { dependencies, devDependencies } = pkg
   const include = subset[target].include || []
 
+  // Delete scripts prepare section in the generated file
+  delete pkg.scripts.prepare
+
   if (dependencies) {
     pkg.dependencies = filterDeps(dependencies, include)
   }

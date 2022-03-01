@@ -75,6 +75,10 @@ Create FrontRowStorefront
 flow accounts add-contract FrontRowStorefront ./libs/shared/data-access-flow/src/lib/frontrow/contracts/FrontRowStorefront.cdc --signer testnet-account -n testnet -f flow.json -f flow-testnet.json
 ```
 
+**Update**
+
+Use the above commands, but replace `add-contract` with `update-contract`
+
 ## Organization
 
 - [apps/flow-test](./apps/flow-test)

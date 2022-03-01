@@ -42,7 +42,7 @@
             "lintFilePatterns": ["apps/api/**/*.ts"]
           }
         },
-        "e2e": {
+        "func-test": {
           "executor": "@nrwl/jest:jest",
           "outputs": ["coverage/apps/api"],
           "options": {
@@ -51,7 +51,8 @@
             "runInBand": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:app"]
     },
     "api-data-access-asset": {
       "root": "libs/api/data-access-asset",
@@ -73,7 +74,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-blueprint": {
       "root": "libs/api/data-access-blueprint",
@@ -95,7 +97,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-celebrity": {
       "root": "libs/api/data-access-celebrity",
@@ -117,7 +120,77 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-checkout-com": {
+      "root": "libs/api/data-access-checkout-com",
+      "sourceRoot": "libs/api/data-access-checkout-com/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/data-access-checkout-com/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/data-access-checkout-com"],
+          "options": {
+            "jestConfig": "libs/api/data-access-checkout-com/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-checkout-com-charge": {
+      "root": "libs/api/data-access-checkout-com-charge",
+      "sourceRoot": "libs/api/data-access-checkout-com-charge/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/data-access-checkout-com-charge/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/data-access-checkout-com-charge"],
+          "options": {
+            "jestConfig": "libs/api/data-access-checkout-com-charge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-coinbase-charge": {
+      "root": "libs/api/data-access-coinbase-charge",
+      "sourceRoot": "libs/api/data-access-coinbase-charge/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/data-access-coinbase-charge/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/data-access-coinbase-charge"],
+          "options": {
+            "jestConfig": "libs/api/data-access-coinbase-charge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-collector": {
       "root": "libs/api/data-access-collector",
@@ -139,28 +212,31 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
-    "api-data-access-core": {
-      "root": "libs/api/data-access-core",
-      "sourceRoot": "libs/api/data-access-core/src",
+    "api-data-access-db-state": {
+      "root": "libs/api/data-access-db-state",
+      "sourceRoot": "libs/api/data-access-db-state/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/api/data-access-core/**/*.ts"]
+            "lintFilePatterns": ["libs/api/data-access-db-state/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/api/data-access-core"],
+          "outputs": ["coverage/libs/api/data-access-db-state"],
           "options": {
-            "jestConfig": "libs/api/data-access-core/jest.config.ts",
+            "jestConfig": "libs/api/data-access-db-state/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-drop-registration": {
       "root": "libs/api/data-access-drop-registration",
@@ -182,7 +258,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-email": {
       "root": "libs/api/data-access-email",
@@ -204,7 +281,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-login": {
       "root": "libs/api/data-access-login",
@@ -226,7 +304,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-nft": {
       "root": "libs/api/data-access-nft",
@@ -248,7 +327,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-nft-purchase": {
       "root": "libs/api/data-access-nft-purchase",
@@ -270,7 +350,31 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
+    },
+    "api-data-access-nft-sale-listing": {
+      "root": "libs/api/data-access-nft-sale-listing",
+      "sourceRoot": "libs/api/data-access-nft-sale-listing/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/data-access-nft-sale-listing/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/data-access-nft-sale-listing"],
+          "options": {
+            "jestConfig": "libs/api/data-access-nft-sale-listing/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-partner": {
       "root": "libs/api/data-access-partner",
@@ -291,7 +395,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-query": {
       "root": "libs/api/data-access-query",
@@ -313,7 +418,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-rights-provider": {
       "root": "libs/api/data-access-rights-provider",
@@ -335,7 +441,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-user": {
       "root": "libs/api/data-access-user",
@@ -357,7 +464,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-data-access-user-registration": {
       "root": "libs/api/data-access-user-registration",
@@ -379,7 +487,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:data-access"]
     },
     "api-domain-blueprint": {
       "root": "libs/api/domain-blueprint",
@@ -401,7 +510,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:domain"]
     },
     "api-domain-celebrity": {
       "root": "libs/api/domain-celebrity",
@@ -423,7 +533,77 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-checkout-com": {
+      "root": "libs/api/domain-checkout-com",
+      "sourceRoot": "libs/api/domain-checkout-com/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/domain-checkout-com/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/domain-checkout-com"],
+          "options": {
+            "jestConfig": "libs/api/domain-checkout-com/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-checkout-com-charge": {
+      "root": "libs/api/domain-checkout-com-charge",
+      "sourceRoot": "libs/api/domain-checkout-com-charge/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/domain-checkout-com-charge/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/domain-checkout-com-charge"],
+          "options": {
+            "jestConfig": "libs/api/domain-checkout-com-charge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-coinbase-charge": {
+      "root": "libs/api/domain-coinbase-charge",
+      "sourceRoot": "libs/api/domain-coinbase-charge/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/domain-coinbase-charge/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/domain-coinbase-charge"],
+          "options": {
+            "jestConfig": "libs/api/domain-coinbase-charge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:domain"]
     },
     "api-domain-collector": {
       "root": "libs/api/domain-collector",
@@ -445,7 +625,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:domain"]
     },
     "api-domain-core": {
       "root": "libs/api/domain-core",
@@ -466,7 +647,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:domain"]
     },
     "api-domain-drop-registration": {
       "root": "libs/api/domain-drop-registration",
@@ -488,7 +670,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:domain"]
     },
     "api-domain-nft": {
       "root": "libs/api/domain-nft",
@@ -510,7 +693,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:domain"]
     },
     "api-domain-nft-purchase": {
       "root": "libs/api/domain-nft-purchase",
@@ -532,7 +716,31 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-nft-sale-listing": {
+      "root": "libs/api/domain-nft-sale-listing",
+      "sourceRoot": "libs/api/domain-nft-sale-listing/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/domain-nft-sale-listing/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/domain-nft-sale-listing"],
+          "options": {
+            "jestConfig": "libs/api/domain-nft-sale-listing/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:domain"]
     },
     "api-domain-partner": {
       "root": "libs/api/domain-partner",
@@ -553,7 +761,31 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:domain"]
+    },
+    "api-domain-registration-for-drop": {
+      "root": "libs/api/domain-registration-for-drop",
+      "sourceRoot": "libs/api/domain-registration-for-drop/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/domain-registration-for-drop/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/domain-registration-for-drop"],
+          "options": {
+            "jestConfig": "libs/api/domain-registration-for-drop/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:domain"]
     },
     "api-domain-user": {
       "root": "libs/api/domain-user",
@@ -575,7 +807,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:domain"]
     },
     "api-domain-user-registration": {
       "root": "libs/api/domain-user-registration",
@@ -597,7 +830,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:domain"]
     },
     "api-feature-asset": {
       "root": "libs/api/feature-asset",
@@ -619,7 +853,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-blueprint": {
       "root": "libs/api/feature-blueprint",
@@ -641,7 +876,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-celebrity": {
       "root": "libs/api/feature-celebrity",
@@ -663,7 +899,100 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-checkout-com-charge": {
+      "root": "libs/api/feature-checkout-com-charge",
+      "sourceRoot": "libs/api/feature-checkout-com-charge/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-checkout-com-charge/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-checkout-com-charge"],
+          "options": {
+            "jestConfig": "libs/api/feature-checkout-com-charge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-checkout-com-charge-webhook": {
+      "root": "libs/api/feature-checkout-com-charge-webhook",
+      "sourceRoot": "libs/api/feature-checkout-com-charge-webhook/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-checkout-com-charge-webhook/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-checkout-com-charge-webhook"],
+          "options": {
+            "jestConfig": "libs/api/feature-checkout-com-charge-webhook/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-coinbase-charge": {
+      "root": "libs/api/feature-coinbase-charge",
+      "sourceRoot": "libs/api/feature-coinbase-charge/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-coinbase-charge/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-coinbase-charge"],
+          "options": {
+            "jestConfig": "libs/api/feature-coinbase-charge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-coinbase-charge-webhook": {
+      "root": "libs/api/feature-coinbase-charge-webhook",
+      "sourceRoot": "libs/api/feature-coinbase-charge-webhook/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-coinbase-charge-webhook/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-coinbase-charge-webhook"],
+          "options": {
+            "jestConfig": "libs/api/feature-coinbase-charge-webhook/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-collector": {
       "root": "libs/api/feature-collector",
@@ -685,7 +1014,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-core": {
       "root": "libs/api/feature-core",
@@ -707,7 +1037,54 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-db-state": {
+      "root": "libs/api/feature-db-state",
+      "sourceRoot": "libs/api/feature-db-state/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-db-state/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-db-state"],
+          "options": {
+            "jestConfig": "libs/api/feature-db-state/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-drop-registration": {
+      "root": "libs/api/feature-drop-registration",
+      "sourceRoot": "libs/api/feature-drop-registration/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-drop-registration/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-drop-registration"],
+          "options": {
+            "jestConfig": "libs/api/feature-drop-registration/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-forgot-password": {
       "root": "libs/api/feature-forgot-password",
@@ -729,7 +1106,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-health": {
       "root": "libs/api/feature-health",
@@ -750,7 +1128,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-login": {
       "root": "libs/api/feature-login",
@@ -772,7 +1151,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-nft": {
       "root": "libs/api/feature-nft",
@@ -794,7 +1174,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-nft-purchase": {
       "root": "libs/api/feature-nft-purchase",
@@ -816,7 +1197,31 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-nft-sale-listing": {
+      "root": "libs/api/feature-nft-sale-listing",
+      "sourceRoot": "libs/api/feature-nft-sale-listing/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-nft-sale-listing/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-nft-sale-listing"],
+          "options": {
+            "jestConfig": "libs/api/feature-nft-sale-listing/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-notification-webhook": {
       "root": "libs/api/feature-notification-webhook",
@@ -837,7 +1242,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-partner": {
       "root": "libs/api/feature-partner",
@@ -858,7 +1264,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-payments": {
       "root": "libs/api/feature-payments",
@@ -880,7 +1287,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-query": {
       "root": "libs/api/feature-query",
@@ -902,7 +1310,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-user": {
       "root": "libs/api/feature-user",
@@ -924,7 +1333,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
     },
     "api-feature-user-registration": {
       "root": "libs/api/feature-user-registration",
@@ -946,7 +1356,74 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-feature-verify-request": {
+      "root": "libs/api/feature-verify-request",
+      "sourceRoot": "libs/api/feature-verify-request/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/api/feature-verify-request/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/api/feature-verify-request"],
+          "options": {
+            "jestConfig": "libs/api/feature-verify-request/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:api", "type:feature"]
+    },
+    "api-test-helper": {
+      "root": "apps/api-test-helper",
+      "sourceRoot": "apps/api-test-helper/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/api-test-helper",
+            "main": "apps/api-test-helper/src/main.ts",
+            "tsConfig": "apps/api-test-helper/tsconfig.app.json",
+            "assets": ["apps/api-test-helper/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/api-test-helper/src/environments/environment.ts",
+                  "with": "apps/api-test-helper/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "api-test-helper:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/api-test-helper/**/*.ts"]
+          }
+        }
+      },
+      "tags": ["scope:api", "type:app"]
     },
     "api-util-app-config": {
       "root": "libs/api/util-app-config",
@@ -968,7 +1445,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
     },
     "api-util-auth": {
       "root": "libs/api/util-auth",
@@ -990,7 +1468,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
     },
     "api-util-aws": {
       "root": "libs/api/util-aws",
@@ -1012,7 +1491,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
     },
     "api-util-aws-s3": {
       "root": "libs/api/util-aws-s3",
@@ -1034,7 +1514,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
     },
     "api-util-aws-ses": {
       "root": "libs/api/util-aws-ses",
@@ -1056,7 +1537,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
     },
     "api-util-crypto": {
       "root": "libs/api/util-crypto",
@@ -1078,7 +1560,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
     },
     "api-util-forgot-password": {
       "root": "libs/api/util-forgot-password",
@@ -1100,7 +1583,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
     },
     "api-util-login": {
       "root": "libs/api/util-login",
@@ -1122,7 +1606,360 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:api", "type:util"]
+    },
+    "backend-data-access-db-core": {
+      "root": "libs/backend/data-access-db-core",
+      "sourceRoot": "libs/backend/data-access-db-core/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/data-access-db-core/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/data-access-db-core"],
+          "options": {
+            "jestConfig": "libs/backend/data-access-db-core/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:data-access"]
+    },
+    "backend-feature-blockchain-emulator": {
+      "root": "libs/backend/feature-blockchain-emulator",
+      "sourceRoot": "libs/backend/feature-blockchain-emulator/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/feature-blockchain-emulator/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/feature-blockchain-emulator"],
+          "options": {
+            "jestConfig": "libs/backend/feature-blockchain-emulator/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:feature"]
+    },
+    "backend-feature-flow": {
+      "root": "libs/backend/feature-flow",
+      "sourceRoot": "libs/backend/feature-flow/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/feature-flow/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/feature-flow"],
+          "options": {
+            "jestConfig": "libs/backend/feature-flow/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:feature"]
+    },
+    "backend-type-blockchain": {
+      "root": "libs/backend/type-blockchain",
+      "sourceRoot": "libs/backend/type-blockchain/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/type-blockchain/**/*.ts"]
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:type"]
+    },
+    "backend-type-db-blueprint": {
+      "root": "libs/backend/type-db-blueprint",
+      "sourceRoot": "libs/backend/type-db-blueprint/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/type-db-blueprint/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/type-db-blueprint"],
+          "options": {
+            "jestConfig": "libs/backend/type-db-blueprint/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:type"]
+    },
+    "backend-type-db-celebrity": {
+      "root": "libs/backend/type-db-celebrity",
+      "sourceRoot": "libs/backend/type-db-celebrity/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/type-db-celebrity/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/type-db-celebrity"],
+          "options": {
+            "jestConfig": "libs/backend/type-db-celebrity/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:type"]
+    },
+    "backend-type-db-nft": {
+      "root": "libs/backend/type-db-nft",
+      "sourceRoot": "libs/backend/type-db-nft/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/type-db-nft/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/type-db-nft"],
+          "options": {
+            "jestConfig": "libs/backend/type-db-nft/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:type"]
+    },
+    "backend-type-db-nft-purchase": {
+      "root": "libs/backend/type-db-nft-purchase",
+      "sourceRoot": "libs/backend/type-db-nft-purchase/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/type-db-nft-purchase/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/type-db-nft-purchase"],
+          "options": {
+            "jestConfig": "libs/backend/type-db-nft-purchase/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:type"]
+    },
+    "backend-type-db-rights-provider": {
+      "root": "libs/backend/type-db-rights-provider",
+      "sourceRoot": "libs/backend/type-db-rights-provider/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/type-db-rights-provider/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/type-db-rights-provider"],
+          "options": {
+            "jestConfig": "libs/backend/type-db-rights-provider/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:type"]
+    },
+    "backend-util-app": {
+      "root": "libs/backend/util-app",
+      "sourceRoot": "libs/backend/util-app/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/util-app/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/util-app"],
+          "options": {
+            "jestConfig": "libs/backend/util-app/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:util"]
+    },
+    "backend-util-app-config": {
+      "root": "libs/backend/util-app-config",
+      "sourceRoot": "libs/backend/util-app-config/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/util-app-config/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/util-app-config"],
+          "options": {
+            "jestConfig": "libs/backend/util-app-config/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:util"]
+    },
+    "backend-util-aws-s3": {
+      "root": "libs/backend/util-aws-s3",
+      "sourceRoot": "libs/backend/util-aws-s3/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/util-aws-s3/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/util-aws-s3"],
+          "options": {
+            "jestConfig": "libs/backend/util-aws-s3/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:util"]
+    },
+    "backend-util-coinbase-timeline": {
+      "root": "libs/backend/util-coinbase-timeline",
+      "sourceRoot": "libs/backend/util-coinbase-timeline/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/util-coinbase-timeline/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/util-coinbase-timeline"],
+          "options": {
+            "jestConfig": "libs/backend/util-coinbase-timeline/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:util"]
+    },
+    "backend-util-flow": {
+      "root": "libs/backend/util-flow",
+      "sourceRoot": "libs/backend/util-flow/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/backend/util-flow/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend/util-flow"],
+          "options": {
+            "jestConfig": "libs/backend/util-flow/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:backend", "type:util"]
+    },
+    "blockchain-emulator": {
+      "root": "apps/blockchain-emulator",
+      "projectType": "application",
+      "sourceRoot": "apps/blockchain-emulator/src",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/blockchain-emulator",
+            "main": "apps/blockchain-emulator/src/main.ts",
+            "tsConfig": "apps/blockchain-emulator/tsconfig.app.json"
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "blockchain-emulator:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/blockchain-emulator/**/*.{js,ts}"]
+          }
+        },
+        "integration-test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/blockchain-emulator"],
+          "options": {
+            "jestConfig": "apps/blockchain-emulator/jest.config.ts",
+            "runInBand": true,
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:blockchain", "type:app"]
     },
     "db-api": {
       "root": "apps/db-api",
@@ -1135,29 +1972,269 @@
             "lintFilePatterns": ["apps/db-api/**/*.ts"]
           }
         }
-      }
+      },
+      "tags": ["scope:db-api", "type:app"]
     },
-    "flow-test": {
-      "root": "apps/flow-test",
+    "db-jobs": {
+      "root": "apps/db-jobs",
+      "sourceRoot": "apps/db-jobs/src",
       "projectType": "application",
-      "sourceRoot": "apps/flow-test/src",
       "targets": {
-        "test-flow": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/flow-test"],
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
           "options": {
-            "jestConfig": "apps/flow-test/jest.config.ts",
-            "runInBand": true,
+            "lintFilePatterns": ["apps/db-jobs/**/*.ts"]
+          }
+        }
+      },
+      "tags": ["scope:db-jobs", "type:app"]
+    },
+    "frontend-util-config": {
+      "root": "libs/frontend/util-config",
+      "sourceRoot": "libs/frontend/util-config/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/frontend/util-config/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/frontend/util-config"],
+          "options": {
+            "jestConfig": "libs/frontend/util-config/jest.config.ts",
             "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:frontend", "type:util"]
+    },
+    "frontend-util-translations": {
+      "root": "libs/frontend/util-translations",
+      "sourceRoot": "libs/frontend/util-translations/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/frontend/util-translations/**/*.ts"]
+          }
+        },
+        "export": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "node node_modules/.bin/i18n-json -i libs/frontend/util-translations/src/lib/{args.app} -o {args.output} -f en.json"
+            ]
+          }
+        },
+        "import": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              "node node_modules/.bin/i18n-json -i {args.input} -o libs/frontend/util-translations/src/lib/{args.app}",
+              {
+                "command": "nx format frontend-util-translations",
+                "forwardAllArgs": false
+              }
+            ]
+          }
+        }
+      },
+      "tags": ["scope:frontend", "type:util"]
+    },
+    "jobs": {
+      "root": "apps/jobs",
+      "sourceRoot": "apps/jobs/src",
+      "projectType": "application",
+      "targets": {
+        "build": {
+          "executor": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/jobs",
+            "main": "apps/jobs/src/main.ts",
+            "tsConfig": "apps/jobs/tsconfig.app.json"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/jobs/src/environments/environment.ts",
+                  "with": "apps/jobs/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "executor": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "jobs:build"
           }
         },
         "lint": {
           "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["apps/flow-test/**/*.{js,ts}"]
+            "lintFilePatterns": ["apps/jobs/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/jobs"],
+          "options": {
+            "jestConfig": "apps/jobs/jest.config.ts",
+            "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:jobs", "type:app"]
+    },
+    "jobs-data-access-job": {
+      "root": "libs/jobs/data-access-job",
+      "sourceRoot": "libs/jobs/data-access-job/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/jobs/data-access-job/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/jobs/data-access-job"],
+          "options": {
+            "jestConfig": "libs/jobs/data-access-job/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:jobs", "type:data-access"]
+    },
+    "jobs-feature-drop-registration": {
+      "root": "libs/jobs/feature-drop-registration",
+      "sourceRoot": "libs/jobs/feature-drop-registration/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/jobs/feature-drop-registration/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/jobs/feature-drop-registration"],
+          "options": {
+            "jestConfig": "libs/jobs/feature-drop-registration/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:jobs", "type:feature"]
+    },
+    "jobs-feature-purchase-blockchain": {
+      "root": "libs/jobs/feature-purchase-blockchain",
+      "sourceRoot": "libs/jobs/feature-purchase-blockchain/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/jobs/feature-purchase-blockchain/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/jobs/feature-purchase-blockchain"],
+          "options": {
+            "jestConfig": "libs/jobs/feature-purchase-blockchain/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:jobs", "type:feature"]
+    },
+    "jobs-feature-purchase-mint-nft": {
+      "root": "libs/jobs/feature-purchase-mint-nft",
+      "sourceRoot": "libs/jobs/feature-purchase-mint-nft/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/jobs/feature-purchase-mint-nft/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/jobs/feature-purchase-mint-nft"],
+          "options": {
+            "jestConfig": "libs/jobs/feature-purchase-mint-nft/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:jobs", "type:feature"]
+    },
+    "jobs-feature-sync-blockchain-events": {
+      "root": "libs/jobs/feature-sync-blockchain-events",
+      "sourceRoot": "libs/jobs/feature-sync-blockchain-events/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/jobs/feature-sync-blockchain-events/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/jobs/feature-sync-blockchain-events"],
+          "options": {
+            "jestConfig": "libs/jobs/feature-sync-blockchain-events/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:jobs", "type:feature"]
+    },
+    "jobs-util-app": {
+      "root": "libs/jobs/util-app",
+      "sourceRoot": "libs/jobs/util-app/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/jobs/util-app/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/jobs/util-app"],
+          "options": {
+            "jestConfig": "libs/jobs/util-app/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:jobs", "type:util"]
     },
     "shared-data-access-flow": {
       "root": "libs/shared/data-access-flow",
@@ -1185,552 +2262,1015 @@
             "files": "libs/shared/data-access-flow/src/lib/frontrow/contracts/**/*.cdc,libs/shared/data-access-flow/src/lib/frontrow/scripts/**/*.cdc,libs/shared/data-access-flow/src/lib/frontrow/transactions/**/*.cdc"
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:util"]
     },
-    "shared-util-api-asset": {
-      "root": "libs/shared/util-api-asset",
-      "sourceRoot": "libs/shared/util-api-asset/src",
+    "shared-type-api-asset": {
+      "root": "libs/shared/type-api-asset",
+      "sourceRoot": "libs/shared/type-api-asset/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-asset/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-asset/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-asset"],
+          "outputs": ["coverage/libs/shared/type-api-asset"],
           "options": {
-            "jestConfig": "libs/shared/util-api-asset/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-asset/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-auth": {
-      "root": "libs/shared/util-api-auth",
-      "sourceRoot": "libs/shared/util-api-auth/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-api-auth/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-auth"],
-          "options": {
-            "jestConfig": "libs/shared/util-api-auth/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-util-api-blueprint": {
-      "root": "libs/shared/util-api-blueprint",
-      "sourceRoot": "libs/shared/util-api-blueprint/src",
+    "shared-type-api-blueprint": {
+      "root": "libs/shared/type-api-blueprint",
+      "sourceRoot": "libs/shared/type-api-blueprint/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-blueprint/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-blueprint/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-blueprint"],
+          "outputs": ["coverage/libs/shared/type-api-blueprint"],
           "options": {
-            "jestConfig": "libs/shared/util-api-blueprint/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-blueprint/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-celebrity": {
-      "root": "libs/shared/util-api-celebrity",
-      "sourceRoot": "libs/shared/util-api-celebrity/src",
+    "shared-type-api-celebrity": {
+      "root": "libs/shared/type-api-celebrity",
+      "sourceRoot": "libs/shared/type-api-celebrity/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-celebrity/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-celebrity/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-celebrity"],
+          "outputs": ["coverage/libs/shared/type-api-celebrity"],
           "options": {
-            "jestConfig": "libs/shared/util-api-celebrity/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-celebrity/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-collector": {
-      "root": "libs/shared/util-api-collector",
-      "sourceRoot": "libs/shared/util-api-collector/src",
+    "shared-type-api-checkout-com": {
+      "root": "libs/shared/type-api-checkout-com",
+      "sourceRoot": "libs/shared/type-api-checkout-com/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-collector/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-checkout-com/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-collector"],
+          "outputs": ["coverage/libs/shared/type-api-checkout-com"],
           "options": {
-            "jestConfig": "libs/shared/util-api-collector/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-checkout-com/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:util"]
     },
-    "shared-util-api-core": {
-      "root": "libs/shared/util-api-core",
-      "sourceRoot": "libs/shared/util-api-core/src",
+    "shared-type-api-checkout-com-charge": {
+      "root": "libs/shared/type-api-checkout-com-charge",
+      "sourceRoot": "libs/shared/type-api-checkout-com-charge/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-core/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-checkout-com-charge/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-core"],
+          "outputs": ["coverage/libs/shared/type-api-checkout-com-charge"],
           "options": {
-            "jestConfig": "libs/shared/util-api-core/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-checkout-com-charge/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:util"]
     },
-    "shared-util-api-drop-registration": {
-      "root": "libs/shared/util-api-drop-registration",
-      "sourceRoot": "libs/shared/util-api-drop-registration/src",
+    "shared-type-api-coinbase-charge": {
+      "root": "libs/shared/type-api-coinbase-charge",
+      "sourceRoot": "libs/shared/type-api-coinbase-charge/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-drop-registration/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-coinbase-charge/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-drop-registration"],
+          "outputs": ["coverage/libs/shared/type-api-coinbase-charge"],
           "options": {
-            "jestConfig": "libs/shared/util-api-drop-registration/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-coinbase-charge/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-forgot-password": {
-      "root": "libs/shared/util-api-forgot-password",
-      "sourceRoot": "libs/shared/util-api-forgot-password/src",
+    "shared-type-api-coinbase-charge-external": {
+      "root": "libs/shared/type-api-coinbase-charge-external",
+      "sourceRoot": "libs/shared/type-api-coinbase-charge-external/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-forgot-password/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-coinbase-charge-external/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-forgot-password"],
+          "outputs": ["coverage/libs/shared/type-api-coinbase-charge-external"],
           "options": {
-            "jestConfig": "libs/shared/util-api-forgot-password/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-coinbase-charge-external/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-login": {
-      "root": "libs/shared/util-api-login",
-      "sourceRoot": "libs/shared/util-api-login/src",
+    "shared-type-api-collector": {
+      "root": "libs/shared/type-api-collector",
+      "sourceRoot": "libs/shared/type-api-collector/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-login/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-collector/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-login"],
+          "outputs": ["coverage/libs/shared/type-api-collector"],
           "options": {
-            "jestConfig": "libs/shared/util-api-login/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-collector/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-nft": {
-      "root": "libs/shared/util-api-nft",
-      "sourceRoot": "libs/shared/util-api-nft/src",
+    "shared-type-api-core": {
+      "root": "libs/shared/type-api-core",
+      "sourceRoot": "libs/shared/type-api-core/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-nft/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-core/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-nft"],
+          "outputs": ["coverage/libs/shared/type-api-core"],
           "options": {
-            "jestConfig": "libs/shared/util-api-nft/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-core/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-nft-purchase": {
-      "root": "libs/shared/util-api-nft-purchase",
-      "sourceRoot": "libs/shared/util-api-nft-purchase/src",
+    "shared-type-api-drop-registration": {
+      "root": "libs/shared/type-api-drop-registration",
+      "sourceRoot": "libs/shared/type-api-drop-registration/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-nft-purchase/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-drop-registration/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-nft-purchase"],
+          "outputs": ["coverage/libs/shared/type-api-drop-registration"],
           "options": {
-            "jestConfig": "libs/shared/util-api-nft-purchase/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-drop-registration/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-notification-webhook": {
-      "root": "libs/shared/util-api-notification-webhook",
-      "sourceRoot": "libs/shared/util-api-notification-webhook/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-api-notification-webhook/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-notification-webhook"],
-          "options": {
-            "jestConfig": "libs/shared/util-api-notification-webhook/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-util-api-partner": {
-      "root": "libs/shared/util-api-partner",
-      "sourceRoot": "libs/shared/util-api-partner/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-api-partner/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-partner"],
-          "options": {
-            "jestConfig": "libs/shared/util-api-partner/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-util-api-payments": {
-      "root": "libs/shared/util-api-payments",
-      "sourceRoot": "libs/shared/util-api-payments/src",
+    "shared-type-api-forgot-password": {
+      "root": "libs/shared/type-api-forgot-password",
+      "sourceRoot": "libs/shared/type-api-forgot-password/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-payments/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-forgot-password/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-payments"],
+          "outputs": ["coverage/libs/shared/type-api-forgot-password"],
           "options": {
-            "jestConfig": "libs/shared/util-api-payments/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-forgot-password/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-query": {
-      "root": "libs/shared/util-api-query",
-      "sourceRoot": "libs/shared/util-api-query/src",
+    "shared-type-api-login": {
+      "root": "libs/shared/type-api-login",
+      "sourceRoot": "libs/shared/type-api-login/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-query/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-login/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-query"],
+          "outputs": ["coverage/libs/shared/type-api-login"],
           "options": {
-            "jestConfig": "libs/shared/util-api-query/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-login/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-user": {
-      "root": "libs/shared/util-api-user",
-      "sourceRoot": "libs/shared/util-api-user/src",
+    "shared-type-api-nft": {
+      "root": "libs/shared/type-api-nft",
+      "sourceRoot": "libs/shared/type-api-nft/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-user/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-nft/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-user"],
+          "outputs": ["coverage/libs/shared/type-api-nft"],
           "options": {
-            "jestConfig": "libs/shared/util-api-user/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-nft/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-api-user-registration": {
-      "root": "libs/shared/util-api-user-registration",
-      "sourceRoot": "libs/shared/util-api-user-registration/src",
+    "shared-type-api-nft-purchase": {
+      "root": "libs/shared/type-api-nft-purchase",
+      "sourceRoot": "libs/shared/type-api-nft-purchase/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-api-user-registration/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-nft-purchase/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-api-user-registration"],
+          "outputs": ["coverage/libs/shared/type-api-nft-purchase"],
           "options": {
-            "jestConfig": "libs/shared/util-api-user-registration/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-nft-purchase/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-asset": {
-      "root": "libs/shared/util-asset",
-      "sourceRoot": "libs/shared/util-asset/src",
+    "shared-type-api-nft-sale-listing": {
+      "root": "libs/shared/type-api-nft-sale-listing",
+      "sourceRoot": "libs/shared/type-api-nft-sale-listing/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-asset/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-nft-sale-listing/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-asset"],
+          "outputs": ["coverage/libs/shared/type-api-nft-sale-listing"],
           "options": {
-            "jestConfig": "libs/shared/util-asset/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-nft-sale-listing/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-auth": {
-      "root": "libs/shared/util-auth",
-      "sourceRoot": "libs/shared/util-auth/src",
+    "shared-type-api-notification-webhook": {
+      "root": "libs/shared/type-api-notification-webhook",
+      "sourceRoot": "libs/shared/type-api-notification-webhook/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/shared/util-auth/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-notification-webhook/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-auth"],
+          "outputs": ["coverage/libs/shared/type-api-notification-webhook"],
           "options": {
-            "jestConfig": "libs/shared/util-auth/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-notification-webhook/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-blueprint": {
-      "root": "libs/shared/util-blueprint",
-      "sourceRoot": "libs/shared/util-blueprint/src",
+    "shared-type-api-partner": {
+      "root": "libs/shared/type-api-partner",
+      "sourceRoot": "libs/shared/type-api-partner/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-blueprint/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-partner/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-blueprint"],
+          "outputs": ["coverage/libs/shared/type-api-partner"],
           "options": {
-            "jestConfig": "libs/shared/util-blueprint/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-partner/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-celebrity": {
-      "root": "libs/shared/util-celebrity",
-      "sourceRoot": "libs/shared/util-celebrity/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-celebrity/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-celebrity"],
-          "options": {
-            "jestConfig": "libs/shared/util-celebrity/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-util-collector": {
-      "root": "libs/shared/util-collector",
-      "sourceRoot": "libs/shared/util-collector/src",
+    "shared-type-api-payments": {
+      "root": "libs/shared/type-api-payments",
+      "sourceRoot": "libs/shared/type-api-payments/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-collector/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-payments/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-collector"],
+          "outputs": ["coverage/libs/shared/type-api-payments"],
           "options": {
-            "jestConfig": "libs/shared/util-collector/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-payments/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-core": {
-      "root": "libs/shared/util-core",
-      "sourceRoot": "libs/shared/util-core/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-core/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-core"],
-          "options": {
-            "jestConfig": "libs/shared/util-core/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-util-db-fixtures": {
-      "root": "libs/shared/util-db-fixtures",
-      "sourceRoot": "libs/shared/util-db-fixtures/src",
+    "shared-type-api-query": {
+      "root": "libs/shared/type-api-query",
+      "sourceRoot": "libs/shared/type-api-query/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-db-fixtures/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-query/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-db-fixtures"],
+          "outputs": ["coverage/libs/shared/type-api-query"],
           "options": {
-            "jestConfig": "libs/shared/util-db-fixtures/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-query/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
     },
-    "shared-util-drop-registration": {
-      "root": "libs/shared/util-drop-registration",
-      "sourceRoot": "libs/shared/util-drop-registration/src",
+    "shared-type-api-user": {
+      "root": "libs/shared/type-api-user",
+      "sourceRoot": "libs/shared/type-api-user/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["libs/shared/util-drop-registration/**/*.ts"]
+            "lintFilePatterns": ["libs/shared/type-api-user/**/*.ts"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-drop-registration"],
+          "outputs": ["coverage/libs/shared/type-api-user"],
           "options": {
-            "jestConfig": "libs/shared/util-drop-registration/jest.config.ts",
+            "jestConfig": "libs/shared/type-api-user/jest.config.ts",
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-api-user-registration": {
+      "root": "libs/shared/type-api-user-registration",
+      "sourceRoot": "libs/shared/type-api-user-registration/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-api-user-registration/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-api-user-registration"],
+          "options": {
+            "jestConfig": "libs/shared/type-api-user-registration/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-asset": {
+      "root": "libs/shared/type-asset",
+      "sourceRoot": "libs/shared/type-asset/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-asset/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-asset"],
+          "options": {
+            "jestConfig": "libs/shared/type-asset/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-auth": {
+      "root": "libs/shared/type-auth",
+      "sourceRoot": "libs/shared/type-auth/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-auth/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-auth"],
+          "options": {
+            "jestConfig": "libs/shared/type-auth/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-blockchain-event": {
+      "root": "libs/shared/type-blockchain-event",
+      "sourceRoot": "libs/shared/type-blockchain-event/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-blockchain-event/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-blockchain-event"],
+          "options": {
+            "jestConfig": "libs/shared/type-blockchain-event/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-blueprint": {
+      "root": "libs/shared/type-blueprint",
+      "sourceRoot": "libs/shared/type-blueprint/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-blueprint/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-blueprint"],
+          "options": {
+            "jestConfig": "libs/shared/type-blueprint/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-celebrity": {
+      "root": "libs/shared/type-celebrity",
+      "sourceRoot": "libs/shared/type-celebrity/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-celebrity/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-celebrity"],
+          "options": {
+            "jestConfig": "libs/shared/type-celebrity/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-checkout-com": {
+      "root": "libs/shared/type-checkout-com",
+      "sourceRoot": "libs/shared/type-checkout-com/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-checkout-com/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-checkout-com"],
+          "options": {
+            "jestConfig": "libs/shared/type-checkout-com/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-checkout-com-charge": {
+      "root": "libs/shared/type-checkout-com-charge",
+      "sourceRoot": "libs/shared/type-checkout-com-charge/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-checkout-com-charge/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-checkout-com-charge"],
+          "options": {
+            "jestConfig": "libs/shared/type-checkout-com-charge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-coinbase-charge": {
+      "root": "libs/shared/type-coinbase-charge",
+      "sourceRoot": "libs/shared/type-coinbase-charge/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-coinbase-charge/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-coinbase-charge"],
+          "options": {
+            "jestConfig": "libs/shared/type-coinbase-charge/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-collector": {
+      "root": "libs/shared/type-collector",
+      "sourceRoot": "libs/shared/type-collector/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-collector/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-collector"],
+          "options": {
+            "jestConfig": "libs/shared/type-collector/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-core": {
+      "root": "libs/shared/type-core",
+      "sourceRoot": "libs/shared/type-core/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-core/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-core"],
+          "options": {
+            "jestConfig": "libs/shared/type-core/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-drop-registration": {
+      "root": "libs/shared/type-drop-registration",
+      "sourceRoot": "libs/shared/type-drop-registration/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-drop-registration/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-drop-registration"],
+          "options": {
+            "jestConfig": "libs/shared/type-drop-registration/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-login": {
+      "root": "libs/shared/type-login",
+      "sourceRoot": "libs/shared/type-login/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-login/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-login"],
+          "options": {
+            "jestConfig": "libs/shared/type-login/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-nft": {
+      "root": "libs/shared/type-nft",
+      "sourceRoot": "libs/shared/type-nft/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-nft/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-nft"],
+          "options": {
+            "jestConfig": "libs/shared/type-nft/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-nft-purchase": {
+      "root": "libs/shared/type-nft-purchase",
+      "sourceRoot": "libs/shared/type-nft-purchase/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-nft-purchase/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-nft-purchase"],
+          "options": {
+            "jestConfig": "libs/shared/type-nft-purchase/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-nft-sale-listing": {
+      "root": "libs/shared/type-nft-sale-listing",
+      "sourceRoot": "libs/shared/type-nft-sale-listing/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-nft-sale-listing/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-nft-sale-listing"],
+          "options": {
+            "jestConfig": "libs/shared/type-nft-sale-listing/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-partner": {
+      "root": "libs/shared/type-partner",
+      "sourceRoot": "libs/shared/type-partner/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-partner/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-partner"],
+          "options": {
+            "jestConfig": "libs/shared/type-partner/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-registration-for-drop": {
+      "root": "libs/shared/type-registration-for-drop",
+      "sourceRoot": "libs/shared/type-registration-for-drop/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-registration-for-drop/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-registration-for-drop"],
+          "options": {
+            "jestConfig": "libs/shared/type-registration-for-drop/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-rights-provider": {
+      "root": "libs/shared/type-rights-provider",
+      "sourceRoot": "libs/shared/type-rights-provider/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-rights-provider/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-rights-provider"],
+          "options": {
+            "jestConfig": "libs/shared/type-rights-provider/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-user": {
+      "root": "libs/shared/type-user",
+      "sourceRoot": "libs/shared/type-user/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-user/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-user"],
+          "options": {
+            "jestConfig": "libs/shared/type-user/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-type-user-registration": {
+      "root": "libs/shared/type-user-registration",
+      "sourceRoot": "libs/shared/type-user-registration/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/type-user-registration/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/type-user-registration"],
+          "options": {
+            "jestConfig": "libs/shared/type-user-registration/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:type"]
+    },
+    "shared-util-app": {
+      "root": "libs/shared/util-app",
+      "sourceRoot": "libs/shared/util-app/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/util-app/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/util-app"],
+          "options": {
+            "jestConfig": "libs/shared/util-app/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-aws": {
+      "root": "libs/shared/util-aws",
+      "sourceRoot": "libs/shared/util-aws/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/util-aws/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/util-aws"],
+          "options": {
+            "jestConfig": "libs/shared/util-aws/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:util"]
+    },
+    "shared-util-aws-ses": {
+      "root": "libs/shared/util-aws-ses",
+      "sourceRoot": "libs/shared/util-aws-ses/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/shared/util-aws-ses/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/util-aws-ses"],
+          "options": {
+            "jestConfig": "libs/shared/util-aws-ses/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-util-flow": {
       "root": "libs/shared/util-flow",
@@ -1752,29 +3292,8 @@
             "passWithNoTests": true
           }
         }
-      }
-    },
-    "shared-util-flow-crypto": {
-      "root": "libs/shared/util-flow-crypto",
-      "sourceRoot": "libs/shared/util-flow-crypto/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-flow-crypto/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-flow-crypto"],
-          "options": {
-            "jestConfig": "libs/shared/util-flow-crypto/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
+      },
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-util-format": {
       "root": "libs/shared/util-format",
@@ -1796,73 +3315,8 @@
             "passWithNoTests": true
           }
         }
-      }
-    },
-    "shared-util-login": {
-      "root": "libs/shared/util-login",
-      "sourceRoot": "libs/shared/util-login/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-login/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-login"],
-          "options": {
-            "jestConfig": "libs/shared/util-login/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-util-nft": {
-      "root": "libs/shared/util-nft",
-      "sourceRoot": "libs/shared/util-nft/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-nft/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-nft"],
-          "options": {
-            "jestConfig": "libs/shared/util-nft/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-util-nft-purchase": {
-      "root": "libs/shared/util-nft-purchase",
-      "sourceRoot": "libs/shared/util-nft-purchase/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-nft-purchase/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-nft-purchase"],
-          "options": {
-            "jestConfig": "libs/shared/util-nft-purchase/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
+      },
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-util-parse": {
       "root": "libs/shared/util-parse",
@@ -1883,28 +3337,8 @@
             "passWithNoTests": true
           }
         }
-      }
-    },
-    "shared-util-partner": {
-      "root": "libs/shared/util-partner",
-      "sourceRoot": "libs/shared/util-partner/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-partner/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-partner"],
-          "options": {
-            "jestConfig": "libs/shared/util-partner/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
+      },
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-util-regexes": {
       "root": "libs/shared/util-regexes",
@@ -1926,87 +3360,8 @@
             "passWithNoTests": true
           }
         }
-      }
-    },
-    "shared-util-rights-provider": {
-      "root": "libs/shared/util-rights-provider",
-      "sourceRoot": "libs/shared/util-rights-provider/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-rights-provider/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-rights-provider"],
-          "options": {
-            "jestConfig": "libs/shared/util-rights-provider/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-util-translations": {
-      "root": "libs/shared/util-translations",
-      "sourceRoot": "libs/shared/util-translations/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-translations/**/*.ts"]
-          }
-        }
-      }
-    },
-    "shared-util-user": {
-      "root": "libs/shared/util-user",
-      "sourceRoot": "libs/shared/util-user/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-user/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-user"],
-          "options": {
-            "jestConfig": "libs/shared/util-user/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-util-user-registration": {
-      "root": "libs/shared/util-user-registration",
-      "sourceRoot": "libs/shared/util-user-registration/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/shared/util-user-registration/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/shared/util-user-registration"],
-          "options": {
-            "jestConfig": "libs/shared/util-user-registration/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
+      },
+      "tags": ["scope:shared", "type:util"]
     },
     "shared-util-validate": {
       "root": "libs/shared/util-validate",
@@ -2028,93 +3383,8 @@
             "passWithNoTests": true
           }
         }
-      }
-    },
-    "test-helper": {
-      "root": "apps/test-helper",
-      "sourceRoot": "apps/test-helper/src",
-      "projectType": "application",
-      "targets": {
-        "build": {
-          "executor": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/test-helper",
-            "main": "apps/test-helper/src/main.ts",
-            "tsConfig": "apps/test-helper/tsconfig.app.json",
-            "assets": ["apps/test-helper/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/test-helper/src/environments/environment.ts",
-                  "with": "apps/test-helper/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "executor": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "test-helper:build"
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": ["apps/test-helper/**/*.ts"]
-          }
-        }
-      }
-    },
-    "test-helper-data-access-db": {
-      "root": "libs/test-helper/data-access-db",
-      "sourceRoot": "libs/test-helper/data-access-db/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/test-helper/data-access-db/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/test-helper/data-access-db"],
-          "options": {
-            "jestConfig": "libs/test-helper/data-access-db/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "test-helper-feature-state": {
-      "root": "libs/test-helper/feature-state",
-      "sourceRoot": "libs/test-helper/feature-state/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/test-helper/feature-state/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/test-helper/feature-state"],
-          "options": {
-            "jestConfig": "libs/test-helper/feature-state/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
+      },
+      "tags": ["scope:shared", "type:util"]
     },
     "web": {
       "root": "apps/web",
@@ -2130,7 +3400,6 @@
         "serve": {
           "executor": "nx-vue3-vite:dev-server",
           "options": {
-            "host": "0.0.0.0",
             "port": 8080
           }
         },
@@ -2155,7 +3424,8 @@
             "lintFilePatterns": ["apps/web/**/*.{js,ts,json,vue}"]
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:app"]
     },
     "web-admin": {
       "root": "apps/web-admin",
@@ -2171,7 +3441,6 @@
         "serve": {
           "executor": "nx-vue3-vite:dev-server",
           "options": {
-            "host": "0.0.0.0",
             "port": 8000
           }
         },
@@ -2196,7 +3465,8 @@
             "lintFilePatterns": ["apps/web/**/*.{js,ts,json,vue}"]
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:app"]
     },
     "web-admin-e2e": {
       "root": "apps/web-admin-e2e",
@@ -2224,7 +3494,8 @@
             "lintFilePatterns": ["apps/web-admin-e2e/**/*.{js,jsx,ts,tsx,vue}"]
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:app"]
     },
     "web-data-access-api": {
       "root": "libs/web/data-access-api",
@@ -2245,7 +3516,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:data-access"]
     },
     "web-data-access-fcl": {
       "root": "libs/web/data-access-fcl",
@@ -2267,7 +3539,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:data-access"]
     },
     "web-data-access-state": {
       "root": "libs/web/data-access-state",
@@ -2288,7 +3561,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:data-access"]
     },
     "web-e2e": {
       "root": "apps/web-e2e",
@@ -2313,7 +3587,31 @@
             "lintFilePatterns": ["apps/web-e2e/**/*.{js,jsx,ts,tsx,vue}"]
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:app"]
+    },
+    "web-feature-admin-auth": {
+      "root": "libs/web/feature-admin-auth",
+      "sourceRoot": "libs/web/feature-admin-auth/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/feature-admin-auth/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/feature-admin-auth"],
+          "options": {
+            "jestConfig": "libs/web/feature-admin-auth/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:feature"]
     },
     "web-feature-admin-blueprint": {
       "root": "libs/web/feature-admin-blueprint",
@@ -2334,7 +3632,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:feature"]
     },
     "web-feature-admin-celebrity": {
       "root": "libs/web/feature-admin-celebrity",
@@ -2356,7 +3655,77 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-admin-checkout-com": {
+      "root": "libs/web/feature-admin-checkout-com",
+      "sourceRoot": "libs/web/feature-admin-checkout-com/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/feature-admin-checkout-com/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/feature-admin-checkout-com"],
+          "options": {
+            "jestConfig": "libs/web/feature-admin-checkout-com/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-admin-coinbase": {
+      "root": "libs/web/feature-admin-coinbase",
+      "sourceRoot": "libs/web/feature-admin-coinbase/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/feature-admin-coinbase/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/feature-admin-coinbase"],
+          "options": {
+            "jestConfig": "libs/web/feature-admin-coinbase/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-admin-drop-registration": {
+      "root": "libs/web/feature-admin-drop-registration",
+      "sourceRoot": "libs/web/feature-admin-drop-registration/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/feature-admin-drop-registration/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/feature-admin-drop-registration"],
+          "options": {
+            "jestConfig": "libs/web/feature-admin-drop-registration/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:feature"]
     },
     "web-feature-admin-partner": {
       "root": "libs/web/feature-admin-partner",
@@ -2378,7 +3747,31 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-admin-reports": {
+      "root": "libs/web/feature-admin-reports",
+      "sourceRoot": "libs/web/feature-admin-reports/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/feature-admin-reports/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/feature-admin-reports"],
+          "options": {
+            "jestConfig": "libs/web/feature-admin-reports/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:feature"]
     },
     "web-feature-admin-user": {
       "root": "libs/web/feature-admin-user",
@@ -2400,7 +3793,31 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-assets": {
+      "root": "libs/web/feature-assets",
+      "sourceRoot": "libs/web/feature-assets/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/feature-assets/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/feature-assets"],
+          "options": {
+            "jestConfig": "libs/web/feature-assets/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:feature"]
     },
     "web-feature-auth": {
       "root": "libs/web/feature-auth",
@@ -2422,7 +3839,31 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-celebrity": {
+      "root": "libs/web/feature-celebrity",
+      "sourceRoot": "libs/web/feature-celebrity/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/feature-celebrity/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/feature-celebrity"],
+          "options": {
+            "jestConfig": "libs/web/feature-celebrity/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:feature"]
     },
     "web-feature-collector": {
       "root": "libs/web/feature-collector",
@@ -2444,7 +3885,54 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-collector-purchase": {
+      "root": "libs/web/feature-collector-purchase",
+      "sourceRoot": "libs/web/feature-collector-purchase/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/feature-collector-purchase/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/feature-collector-purchase"],
+          "options": {
+            "jestConfig": "libs/web/feature-collector-purchase/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:feature"]
+    },
+    "web-feature-collector-settings": {
+      "root": "libs/web/feature-collector-settings",
+      "sourceRoot": "libs/web/feature-collector-settings/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/feature-collector-settings/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/feature-collector-settings"],
+          "options": {
+            "jestConfig": "libs/web/feature-collector-settings/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:feature"]
     },
     "web-feature-login-redirect": {
       "root": "libs/web/feature-login-redirect",
@@ -2466,7 +3954,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:feature"]
     },
     "web-feature-nft": {
       "root": "libs/web/feature-nft",
@@ -2488,61 +3977,20 @@
             "passWithNoTests": true
           }
         }
-      }
-    },
-    "web-feature-payments": {
-      "root": "libs/web/feature-payments",
-      "sourceRoot": "libs/web/feature-payments/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/web/feature-payments/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/web/feature-payments"],
-          "options": {
-            "jestConfig": "libs/web/feature-payments/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "web-feature-user-settings": {
-      "root": "libs/web/feature-user-settings",
-      "sourceRoot": "libs/web/feature-user-settings/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/web/feature-user-settings/**/*.ts"]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/web/feature-user-settings"],
-          "options": {
-            "jestConfig": "libs/web/feature-user-settings/jest.config.ts",
-            "passWithNoTests": true
-          }
-        }
-      }
+      },
+      "tags": ["scope:web", "type:feature"]
     },
     "web-ui-assets": {
       "root": "libs/web/ui-assets",
       "sourceRoot": "libs/web/ui-assets/src",
-      "projectType": "library"
+      "projectType": "library",
+      "tags": ["scope:web", "type:ui"]
     },
     "web-ui-theme": {
       "root": "libs/web/ui-theme",
       "sourceRoot": "libs/web/ui-theme/src",
-      "projectType": "library"
+      "projectType": "library",
+      "tags": ["scope:web", "type:ui"]
     },
     "web-ui-widgets": {
       "root": "libs/web/ui-widgets",
@@ -2576,7 +4024,8 @@
             "lintFilePatterns": ["libs/web/ui-widgets/**/*.{js,jsx,ts,tsx,vue}"]
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:ui"]
     },
     "web-util-admin-fields": {
       "root": "libs/web/util-admin-fields",
@@ -2598,7 +4047,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:util"]
     },
     "web-util-api-field-error": {
       "root": "libs/web/util-api-field-error",
@@ -2620,7 +4070,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:util"]
     },
     "web-util-clickaway": {
       "root": "libs/web/util-clickaway",
@@ -2642,7 +4093,77 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:web", "type:util"]
+    },
+    "web-util-doc": {
+      "root": "libs/web/util-doc",
+      "sourceRoot": "libs/web/util-doc/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/util-doc/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/util-doc"],
+          "options": {
+            "jestConfig": "libs/web/util-doc/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:util"]
+    },
+    "web-util-identicon": {
+      "root": "libs/web/util-identicon",
+      "sourceRoot": "libs/web/util-identicon/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/util-identicon/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/util-identicon"],
+          "options": {
+            "jestConfig": "libs/web/util-identicon/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:util"]
+    },
+    "web-util-save-file": {
+      "root": "libs/web/util-save-file",
+      "sourceRoot": "libs/web/util-save-file/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/web/util-save-file/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/web/util-save-file"],
+          "options": {
+            "jestConfig": "libs/web/util-save-file/jest.config.ts",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["scope:web", "type:util"]
     },
     "web-util-validate": {
       "root": "libs/web/util-validate",
@@ -2663,7 +4184,8 @@
             "passWithNoTests": true
           }
         }
-      }
+      },
+      "tags": ["scope:shared", "type:util"]
     },
     "web-util-vite-config": {
       "root": "libs/web/util-vite-config",
@@ -2685,27 +4207,8 @@
             "passWithNoTests": true
           }
         }
-      }
-    }
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/nest"
-  },
-  "defaultProject": "api",
-  "generators": {
-    "@nrwl/react": {
-      "application": {
-        "style": "scss",
-        "linter": "eslint",
-        "babel": true
       },
-      "component": {
-        "style": "scss"
-      },
-      "library": {
-        "style": "scss",
-        "linter": "eslint"
-      }
+      "tags": ["scope:web", "type:util"]
     }
   }
 }

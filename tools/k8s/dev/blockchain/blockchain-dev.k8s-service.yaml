@@ -1,0 +1,20 @@
+# Which API version to use
+# https://matthewpalmer.net/kubernetes-app-developer/articles/kubernetes-apiversion-definition-guide.html
+apiVersion: v1
+kind: Service
+metadata:
+  name: blockchain-emulator
+  labels:
+    component: blockchain-emulator
+    tier: backend
+spec:
+  selector:
+    component: blockchain-emulator
+    tier: backend
+  ports:
+    - name: http
+      port: 7000
+      targetPort: 7000
+    - name: reset
+      port: 3002
+      targetPort: 3002

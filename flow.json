@@ -48,10 +48,20 @@
       "key": "588a3a399697341286ff2080099405d06e1c9cf237ca23bb8e547b65f99208e1",
       "pubKey": "02c60a253f4f14dd2ccf7630448d82a13e527738431797efdfad50a54be1c8023c48e309d67273e713a1cd3305f1c391a6f816b264ee5cdfdb3cb5aa48b02f38"
     },
-    "development-account": {
+    "development-account-admin": {
       "address": "01cf0e2f2f715450",
       "key": "fa577c69ab742382211705b405f4e0c5d085623b1a17a1b8ddd9e4933501714c",
       "pubKey": "7937172429c9d2b738f695650d00ddae1e40089e5c31552a3f1048149a4cf41c08d34a319ba306da41dc0239b9bbf450aa701634e53a0917d3d5aaa2f08099f1"
+    },
+    "development-test-account": {
+      "address": "f3fcd2c1a78f5eee",
+      "key": "acf651db5ec1135721c9e275ce0876dcbb3c735a782f6de8b23c93cb87486bb8",
+      "pubKey": "3e129a4fdeda403473236f13c84a0312adb70eb07143e87091f2277965b6ee845fa816dfa28cb2f24fccc1082634888364fc306169661efa93a2cda561ace97f"
+    },
+    "development-account": {
+      "address": "e03daebed8ca0615",
+      "key": "6da7c2a744f5bedd46d9483f94c159940d4d54f959f08c17e1fcd10e1dea68a8",
+      "pubKey": "d9a0467757e5657f10da1979b83e481034647da4ba85db94e25a02f5004c3c07c7fa56eccfe8df1b2730376892d23c4c94936efd37dd7b79d34487b1bb28af6a"
     }
   },
   "deployments": {

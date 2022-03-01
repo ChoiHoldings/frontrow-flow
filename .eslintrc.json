@@ -13,24 +13,64 @@
             "enforceBuildableLibDependency": true,
             "depConstraints": [
               {
+                "sourceTag": "scope:frontend",
+                "onlyDependOnLibsWithTags": ["scope:frontend", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:web",
+                "onlyDependOnLibsWithTags": [
+                  "scope:web",
+                  "scope:frontend",
+                  "scope:shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:backend",
+                "onlyDependOnLibsWithTags": ["scope:backend", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:api",
+                "onlyDependOnLibsWithTags": ["scope:api", "scope:backend", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:db-api",
+                "onlyDependOnLibsWithTags": [
+                  "scope:db-api",
+                  "scope:backend",
+                  "scope:shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:jobs",
+                "onlyDependOnLibsWithTags": [
+                  "scope:jobs",
+                  "scope:backend",
+                  "scope:shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:db-jobs",
+                "onlyDependOnLibsWithTags": [
+                  "scope:db-jobs",
+                  "scope:backend",
+                  "scope:shared"
+                ]
+              },
+              {
+                "sourceTag": "scope:blockchain",
+                "onlyDependOnLibsWithTags": [
+                  "scope:backend",
+                  "scope:blockchain",
+                  "scope:shared"
+                ]
+              },
+              {
                 "sourceTag": "scope:shared",
                 "onlyDependOnLibsWithTags": ["scope:shared"]
               },
               {
-                "sourceTag": "scope:api",
-                "onlyDependOnLibsWithTags": ["scope:api", "scope:shared"]
-              },
-              {
-                "sourceTag": "scope:web",
-                "onlyDependOnLibsWithTags": ["scope:web", "scope:shared"]
-              },
-              {
-                "sourceTag": "scope:e2e",
-                "onlyDependOnLibsWithTags": ["scope:e2e", "scope:shared"]
-              },
-              {
                 "sourceTag": "type:app",
-                "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
+                "onlyDependOnLibsWithTags": ["type:feature", "type:util", "type:type"]
               },
               {
                 "sourceTag": "type:feature",
@@ -39,26 +79,32 @@
                   "type:ui",
                   "type:data-access",
                   "type:domain",
-                  "type:util"
+                  "type:util",
+                  "type:type"
                 ]
               },
               {
                 "sourceTag": "type:ui",
-                "onlyDependOnLibsWithTags": ["type:ui", "type:util"]
+                "onlyDependOnLibsWithTags": ["type:ui", "type:util", "type:type"]
               },
               {
                 "sourceTag": "type:data-access",
                 "onlyDependOnLibsWithTags": [
                   "type:data-access",
                   "type:domain",
-                  "type:util"
+                  "type:util",
+                  "type:type"
                 ]
               },
               {
                 "sourceTag": "type:domain",
-                "onlyDependOnLibsWithTags": ["type:domain", "type:util"]
+                "onlyDependOnLibsWithTags": ["type:domain", "type:util", "type:type"]
               },
-              { "sourceTag": "type:util", "onlyDependOnLibsWithTags": ["type:util"] }
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": ["type:util", "type:type"]
+              },
+              { "sourceTag": "type:type", "onlyDependOnLibsWithTags": ["type:type"] }
             ]
           }
         ]

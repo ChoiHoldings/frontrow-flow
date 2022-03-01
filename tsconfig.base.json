@@ -28,10 +28,19 @@
       "@ismedia/api/data-access-celebrity": [
         "libs/api/data-access-celebrity/src/index.ts"
       ],
+      "@ismedia/api/data-access-checkout-com": [
+        "libs/api/data-access-checkout-com/src/index.ts"
+      ],
+      "@ismedia/api/data-access-checkout-com-charge": [
+        "libs/api/data-access-checkout-com-charge/src/index.ts"
+      ],
+      "@ismedia/api/data-access-coinbase-charge": [
+        "libs/api/data-access-coinbase-charge/src/index.ts"
+      ],
       "@ismedia/api/data-access-collector": [
         "libs/api/data-access-collector/src/index.ts"
       ],
-      "@ismedia/api/data-access-core": ["libs/api/data-access-core/src/index.ts"],
+      "@ismedia/api/data-access-db-state": ["libs/api/data-access-db-state/src/index.ts"],
       "@ismedia/api/data-access-drop-registration": [
         "libs/api/data-access-drop-registration/src/index.ts"
       ],
@@ -41,8 +50,14 @@
       "@ismedia/api/data-access-nft-purchase": [
         "libs/api/data-access-nft-purchase/src/index.ts"
       ],
+      "@ismedia/api/data-access-nft-sale-listing": [
+        "libs/api/data-access-nft-sale-listing/src/index.ts"
+      ],
       "@ismedia/api/data-access-partner": ["libs/api/data-access-partner/src/index.ts"],
       "@ismedia/api/data-access-query": ["libs/api/data-access-query/src/index.ts"],
+      "@ismedia/api/data-access-registration-for-drop": [
+        "libs/api/data-access-registration-for-drop/src/index.ts"
+      ],
       "@ismedia/api/data-access-rights-provider": [
         "libs/api/data-access-rights-provider/src/index.ts"
       ],
@@ -52,6 +67,13 @@
       ],
       "@ismedia/api/domain-blueprint": ["libs/api/domain-blueprint/src/index.ts"],
       "@ismedia/api/domain-celebrity": ["libs/api/domain-celebrity/src/index.ts"],
+      "@ismedia/api/domain-checkout-com": ["libs/api/domain-checkout-com/src/index.ts"],
+      "@ismedia/api/domain-checkout-com-charge": [
+        "libs/api/domain-checkout-com-charge/src/index.ts"
+      ],
+      "@ismedia/api/domain-coinbase-charge": [
+        "libs/api/domain-coinbase-charge/src/index.ts"
+      ],
       "@ismedia/api/domain-collector": ["libs/api/domain-collector/src/index.ts"],
       "@ismedia/api/domain-core": ["libs/api/domain-core/src/index.ts"],
       "@ismedia/api/domain-drop-registration": [
@@ -59,7 +81,13 @@
       ],
       "@ismedia/api/domain-nft": ["libs/api/domain-nft/src/index.ts"],
       "@ismedia/api/domain-nft-purchase": ["libs/api/domain-nft-purchase/src/index.ts"],
+      "@ismedia/api/domain-nft-sale-listing": [
+        "libs/api/domain-nft-sale-listing/src/index.ts"
+      ],
       "@ismedia/api/domain-partner": ["libs/api/domain-partner/src/index.ts"],
+      "@ismedia/api/domain-registration-for-drop": [
+        "libs/api/domain-registration-for-drop/src/index.ts"
+      ],
       "@ismedia/api/domain-user": ["libs/api/domain-user/src/index.ts"],
       "@ismedia/api/domain-user-registration": [
         "libs/api/domain-user-registration/src/index.ts"
@@ -67,8 +95,24 @@
       "@ismedia/api/feature-asset": ["libs/api/feature-asset/src/index.ts"],
       "@ismedia/api/feature-blueprint": ["libs/api/feature-blueprint/src/index.ts"],
       "@ismedia/api/feature-celebrity": ["libs/api/feature-celebrity/src/index.ts"],
+      "@ismedia/api/feature-checkout-com-charge": [
+        "libs/api/feature-checkout-com-charge/src/index.ts"
+      ],
+      "@ismedia/api/feature-checkout-com-charge-webhook": [
+        "libs/api/feature-checkout-com-charge-webhook/src/index.ts"
+      ],
+      "@ismedia/api/feature-coinbase-charge": [
+        "libs/api/feature-coinbase-charge/src/index.ts"
+      ],
+      "@ismedia/api/feature-coinbase-charge-webhook": [
+        "libs/api/feature-coinbase-charge-webhook/src/index.ts"
+      ],
       "@ismedia/api/feature-collector": ["libs/api/feature-collector/src/index.ts"],
       "@ismedia/api/feature-core": ["libs/api/feature-core/src/index.ts"],
+      "@ismedia/api/feature-db-state": ["libs/api/feature-db-state/src/index.ts"],
+      "@ismedia/api/feature-drop-registration": [
+        "libs/api/feature-drop-registration/src/index.ts"
+      ],
       "@ismedia/api/feature-forgot-password": [
         "libs/api/feature-forgot-password/src/index.ts"
       ],
@@ -76,15 +120,24 @@
       "@ismedia/api/feature-login": ["libs/api/feature-login/src/index.ts"],
       "@ismedia/api/feature-nft": ["libs/api/feature-nft/src/index.ts"],
       "@ismedia/api/feature-nft-purchase": ["libs/api/feature-nft-purchase/src/index.ts"],
+      "@ismedia/api/feature-nft-sale-listing": [
+        "libs/api/feature-nft-sale-listing/src/index.ts"
+      ],
       "@ismedia/api/feature-notification-webhook": [
         "libs/api/feature-notification-webhook/src/index.ts"
       ],
       "@ismedia/api/feature-partner": ["libs/api/feature-partner/src/index.ts"],
       "@ismedia/api/feature-payments": ["libs/api/feature-payments/src/index.ts"],
       "@ismedia/api/feature-query": ["libs/api/feature-query/src/index.ts"],
+      "@ismedia/api/feature-registration-for-drop": [
+        "libs/api/feature-registration-for-drop/src/index.ts"
+      ],
       "@ismedia/api/feature-user": ["libs/api/feature-user/src/index.ts"],
       "@ismedia/api/feature-user-registration": [
         "libs/api/feature-user-registration/src/index.ts"
+      ],
+      "@ismedia/api/feature-verify-request": [
+        "libs/api/feature-verify-request/src/index.ts"
       ],
       "@ismedia/api/util-app-config": ["libs/api/util-app-config/src/index.ts"],
       "@ismedia/api/util-auth": ["libs/api/util-auth/src/index.ts"],
@@ -96,102 +149,196 @@
       "@ismedia/api/util-login": ["libs/api/util-login/src/index.ts"],
       "@ismedia/apps/api": ["apps/api/src/app/app.module.ts"],
       "@ismedia/apps/flow": ["apps/flow/src"],
+      "@ismedia/backend/data-access-db-core": [
+        "libs/backend/data-access-db-core/src/index.ts"
+      ],
+      "@ismedia/backend/feature-blockchain-emulator": [
+        "libs/backend/feature-blockchain-emulator/src/index.ts"
+      ],
+      "@ismedia/backend/feature-flow": ["libs/backend/feature-flow/src/index.ts"],
+      "@ismedia/backend/type-blockchain": ["libs/backend/type-blockchain/src/index.ts"],
+      "@ismedia/backend/type-db-blueprint": [
+        "libs/backend/type-db-blueprint/src/index.ts"
+      ],
+      "@ismedia/backend/type-db-celebrity": [
+        "libs/backend/type-db-celebrity/src/index.ts"
+      ],
+      "@ismedia/backend/type-db-nft": ["libs/backend/type-db-nft/src/index.ts"],
+      "@ismedia/backend/type-db-nft-purchase": [
+        "libs/backend/type-db-nft-purchase/src/index.ts"
+      ],
+      "@ismedia/backend/type-db-rights-provider": [
+        "libs/backend/type-db-rights-provider/src/index.ts"
+      ],
+      "@ismedia/backend/util-app": ["libs/backend/util-app/src/index.ts"],
+      "@ismedia/backend/util-app-config": ["libs/backend/util-app-config/src/index.ts"],
+      "@ismedia/backend/util-aws-s3": ["libs/backend/util-aws-s3/src/index.ts"],
+      "@ismedia/backend/util-coinbase-timeline": [
+        "libs/backend/util-coinbase-timeline/src/index.ts"
+      ],
+      "@ismedia/backend/util-flow": ["libs/backend/util-flow/src/index.ts"],
+      "@ismedia/frontend/util-config": ["libs/frontend/util-config/src/index.ts"],
+      "@ismedia/frontend/util-translations": [
+        "libs/frontend/util-translations/src/index.ts"
+      ],
+      "@ismedia/jobs/data-access-job": ["libs/jobs/data-access-job/src/index.ts"],
+      "@ismedia/jobs/feature-drop-registration": [
+        "libs/jobs/feature-drop-registration/src/index.ts"
+      ],
+      "@ismedia/jobs/feature-purchase-blockchain": [
+        "libs/jobs/feature-purchase-blockchain/src/index.ts"
+      ],
+      "@ismedia/jobs/feature-purchase-mint-nft": [
+        "libs/jobs/feature-purchase-mint-nft/src/index.ts"
+      ],
+      "@ismedia/jobs/feature-sync-blockchain-events": [
+        "libs/jobs/feature-sync-blockchain-events/src/index.ts"
+      ],
+      "@ismedia/jobs/util-app": ["libs/jobs/util-app/src/index.ts"],
       "@ismedia/shared/data-access-flow": ["libs/shared/data-access-flow/src/index.ts"],
-      "@ismedia/shared/util-api-asset": ["libs/shared/util-api-asset/src/index.ts"],
-      "@ismedia/shared/util-api-auth": ["libs/shared/util-api-auth/src/index.ts"],
-      "@ismedia/shared/util-api-blueprint": [
-        "libs/shared/util-api-blueprint/src/index.ts"
+      "@ismedia/shared/type-api-asset": ["libs/shared/type-api-asset/src/index.ts"],
+      "@ismedia/shared/type-api-blueprint": [
+        "libs/shared/type-api-blueprint/src/index.ts"
       ],
-      "@ismedia/shared/util-api-celebrity": [
-        "libs/shared/util-api-celebrity/src/index.ts"
+      "@ismedia/shared/type-api-celebrity": [
+        "libs/shared/type-api-celebrity/src/index.ts"
       ],
-      "@ismedia/shared/util-api-collector": [
-        "libs/shared/util-api-collector/src/index.ts"
+      "@ismedia/shared/type-api-checkout-com": [
+        "libs/shared/type-api-checkout-com/src/index.ts"
       ],
-      "@ismedia/shared/util-api-core": ["libs/shared/util-api-core/src/index.ts"],
-      "@ismedia/shared/util-api-drop-registration": [
-        "libs/shared/util-api-drop-registration/src/index.ts"
+      "@ismedia/shared/type-api-checkout-com-charge": [
+        "libs/shared/type-api-checkout-com-charge/src/index.ts"
       ],
-      "@ismedia/shared/util-api-forgot-password": [
-        "libs/shared/util-api-forgot-password/src/index.ts"
+      "@ismedia/shared/type-api-coinbase-charge": [
+        "libs/shared/type-api-coinbase-charge/src/index.ts"
       ],
-      "@ismedia/shared/util-api-login": ["libs/shared/util-api-login/src/index.ts"],
-      "@ismedia/shared/util-api-nft": ["libs/shared/util-api-nft/src/index.ts"],
-      "@ismedia/shared/util-api-nft-purchase": [
-        "libs/shared/util-api-nft-purchase/src/index.ts"
+      "@ismedia/shared/type-api-coinbase-charge-external": [
+        "libs/shared/type-api-coinbase-charge-external/src/index.ts"
       ],
-      "@ismedia/shared/util-api-notification-webhook": [
-        "libs/shared/util-api-notification-webhook/src/index.ts"
+      "@ismedia/shared/type-api-collector": [
+        "libs/shared/type-api-collector/src/index.ts"
       ],
-      "@ismedia/shared/util-api-partner": ["libs/shared/util-api-partner/src/index.ts"],
-      "@ismedia/shared/util-api-payments": ["libs/shared/util-api-payments/src/index.ts"],
-      "@ismedia/shared/util-api-query": ["libs/shared/util-api-query/src/index.ts"],
-      "@ismedia/shared/util-api-user": ["libs/shared/util-api-user/src/index.ts"],
-      "@ismedia/shared/util-api-user-registration": [
-        "libs/shared/util-api-user-registration/src/index.ts"
+      "@ismedia/shared/type-api-core": ["libs/shared/type-api-core/src/index.ts"],
+      "@ismedia/shared/type-api-drop-registration": [
+        "libs/shared/type-api-drop-registration/src/index.ts"
       ],
-      "@ismedia/shared/util-asset": ["libs/shared/util-asset/src/index.ts"],
-      "@ismedia/shared/util-auth": ["libs/shared/util-auth/src/index.ts"],
-      "@ismedia/shared/util-blueprint": ["libs/shared/util-blueprint/src/index.ts"],
-      "@ismedia/shared/util-celebrity": ["libs/shared/util-celebrity/src/index.ts"],
-      "@ismedia/shared/util-collector": ["libs/shared/util-collector/src/index.ts"],
-      "@ismedia/shared/util-core": ["libs/shared/util-core/src/index.ts"],
-      "@ismedia/shared/util-db-fixtures": ["libs/shared/util-db-fixtures/src/index.ts"],
-      "@ismedia/shared/util-drop-registration": [
-        "libs/shared/util-drop-registration/src/index.ts"
+      "@ismedia/shared/type-api-forgot-password": [
+        "libs/shared/type-api-forgot-password/src/index.ts"
       ],
+      "@ismedia/shared/type-api-login": ["libs/shared/type-api-login/src/index.ts"],
+      "@ismedia/shared/type-api-nft": ["libs/shared/type-api-nft/src/index.ts"],
+      "@ismedia/shared/type-api-nft-purchase": [
+        "libs/shared/type-api-nft-purchase/src/index.ts"
+      ],
+      "@ismedia/shared/type-api-nft-sale-listing": [
+        "libs/shared/type-api-nft-sale-listing/src/index.ts"
+      ],
+      "@ismedia/shared/type-api-notification-webhook": [
+        "libs/shared/type-api-notification-webhook/src/index.ts"
+      ],
+      "@ismedia/shared/type-api-partner": ["libs/shared/type-api-partner/src/index.ts"],
+      "@ismedia/shared/type-api-payments": ["libs/shared/type-api-payments/src/index.ts"],
+      "@ismedia/shared/type-api-query": ["libs/shared/type-api-query/src/index.ts"],
+      "@ismedia/shared/type-api-user": ["libs/shared/type-api-user/src/index.ts"],
+      "@ismedia/shared/type-api-user-registration": [
+        "libs/shared/type-api-user-registration/src/index.ts"
+      ],
+      "@ismedia/shared/type-asset": ["libs/shared/type-asset/src/index.ts"],
+      "@ismedia/shared/type-auth": ["libs/shared/type-auth/src/index.ts"],
+      "@ismedia/shared/type-blockchain-event": [
+        "libs/shared/type-blockchain-event/src/index.ts"
+      ],
+      "@ismedia/shared/type-blueprint": ["libs/shared/type-blueprint/src/index.ts"],
+      "@ismedia/shared/type-celebrity": ["libs/shared/type-celebrity/src/index.ts"],
+      "@ismedia/shared/type-checkout-com": ["libs/shared/type-checkout-com/src/index.ts"],
+      "@ismedia/shared/type-checkout-com-charge": [
+        "libs/shared/type-checkout-com-charge/src/index.ts"
+      ],
+      "@ismedia/shared/type-coinbase-charge": [
+        "libs/shared/type-coinbase-charge/src/index.ts"
+      ],
+      "@ismedia/shared/type-collector": ["libs/shared/type-collector/src/index.ts"],
+      "@ismedia/shared/type-core": ["libs/shared/type-core/src/index.ts"],
+      "@ismedia/shared/type-drop-registration": [
+        "libs/shared/type-drop-registration/src/index.ts"
+      ],
+      "@ismedia/shared/type-login": ["libs/shared/type-login/src/index.ts"],
+      "@ismedia/shared/type-nft": ["libs/shared/type-nft/src/index.ts"],
+      "@ismedia/shared/type-nft-purchase": ["libs/shared/type-nft-purchase/src/index.ts"],
+      "@ismedia/shared/type-nft-sale-listing": [
+        "libs/shared/type-nft-sale-listing/src/index.ts"
+      ],
+      "@ismedia/shared/type-partner": ["libs/shared/type-partner/src/index.ts"],
+      "@ismedia/shared/type-registration-for-drop": [
+        "libs/shared/type-registration-for-drop/src/index.ts"
+      ],
+      "@ismedia/shared/type-rights-provider": [
+        "libs/shared/type-rights-provider/src/index.ts"
+      ],
+      "@ismedia/shared/type-user": ["libs/shared/type-user/src/index.ts"],
+      "@ismedia/shared/type-user-registration": [
+        "libs/shared/type-user-registration/src/index.ts"
+      ],
+      "@ismedia/shared/util-api-registration-for-drop": [
+        "libs/shared/util-api-registration-for-drop/src/index.ts"
+      ],
+      "@ismedia/shared/util-app": ["libs/shared/util-app/src/index.ts"],
+      "@ismedia/shared/util-aws": ["libs/shared/util-aws/src/index.ts"],
+      "@ismedia/shared/util-aws-ses": ["libs/shared/util-aws-ses/src/index.ts"],
       "@ismedia/shared/util-flow": ["libs/shared/util-flow/src/index.ts"],
-      "@ismedia/shared/util-flow-crypto": ["libs/shared/util-flow-crypto/src/index.ts"],
       "@ismedia/shared/util-format": ["libs/shared/util-format/src/index.ts"],
-      "@ismedia/shared/util-login": ["libs/shared/util-login/src/index.ts"],
-      "@ismedia/shared/util-nft": ["libs/shared/util-nft/src/index.ts"],
-      "@ismedia/shared/util-nft-purchase": ["libs/shared/util-nft-purchase/src/index.ts"],
       "@ismedia/shared/util-parse": ["libs/shared/util-parse/src/index.ts"],
-      "@ismedia/shared/util-partner": ["libs/shared/util-partner/src/index.ts"],
       "@ismedia/shared/util-regexes": ["libs/shared/util-regexes/src/index.ts"],
-      "@ismedia/shared/util-rights-provider": [
-        "libs/shared/util-rights-provider/src/index.ts"
-      ],
-      "@ismedia/shared/util-translations": ["libs/shared/util-translations/src/index.ts"],
-      "@ismedia/shared/util-user": ["libs/shared/util-user/src/index.ts"],
-      "@ismedia/shared/util-user-registration": [
-        "libs/shared/util-user-registration/src/index.ts"
-      ],
       "@ismedia/shared/util-validate": ["libs/shared/util-validate/src/index.ts"],
-      "@ismedia/test-helper/data-access-db": [
-        "libs/test-helper/data-access-db/src/index.ts"
-      ],
-      "@ismedia/test-helper/feature-state": [
-        "libs/test-helper/feature-state/src/index.ts"
-      ],
       "@ismedia/web/data-access-api": ["libs/web/data-access-api/src/index.ts"],
       "@ismedia/web/data-access-fcl": ["libs/web/data-access-fcl/src/index.ts"],
       "@ismedia/web/data-access-state": ["libs/web/data-access-state/src/index.ts"],
+      "@ismedia/web/feature-admin-auth": ["libs/web/feature-admin-auth/src/index.ts"],
       "@ismedia/web/feature-admin-blueprint": [
         "libs/web/feature-admin-blueprint/src/index.ts"
       ],
       "@ismedia/web/feature-admin-celebrity": [
         "libs/web/feature-admin-celebrity/src/index.ts"
       ],
+      "@ismedia/web/feature-admin-checkout-com": [
+        "libs/web/feature-admin-checkout-com/src/index.ts"
+      ],
+      "@ismedia/web/feature-admin-coinbase": [
+        "libs/web/feature-admin-coinbase/src/index.ts"
+      ],
+      "@ismedia/web/feature-admin-drop-registration": [
+        "libs/web/feature-admin-drop-registration/src/index.ts"
+      ],
       "@ismedia/web/feature-admin-partner": [
         "libs/web/feature-admin-partner/src/index.ts"
       ],
+      "@ismedia/web/feature-admin-reports": [
+        "libs/web/feature-admin-reports/src/index.ts"
+      ],
       "@ismedia/web/feature-admin-user": ["libs/web/feature-admin-user/src/index.ts"],
+      "@ismedia/web/feature-assets": ["libs/web/feature-assets/src/index.ts"],
       "@ismedia/web/feature-auth": ["libs/web/feature-auth/src/index.ts"],
+      "@ismedia/web/feature-celebrity": ["libs/web/feature-celebrity/src/index.ts"],
       "@ismedia/web/feature-collector": ["libs/web/feature-collector/src/index.ts"],
+      "@ismedia/web/feature-collector-purchase": [
+        "libs/web/feature-collector-purchase/src/index.ts"
+      ],
+      "@ismedia/web/feature-collector-settings": [
+        "libs/web/feature-collector-settings/src/index.ts"
+      ],
       "@ismedia/web/feature-login-redirect": [
         "libs/web/feature-login-redirect/src/index.ts"
       ],
       "@ismedia/web/feature-nft": ["libs/web/feature-nft/src/index.ts"],
-      "@ismedia/web/feature-payments": ["libs/web/feature-payments/src/index.ts"],
-      "@ismedia/web/feature-user-settings": [
-        "libs/web/feature-user-settings/src/index.ts"
-      ],
+      "@ismedia/web/ui-assets": ["libs/web/ui-assets/index.ts"],
       "@ismedia/web/ui-theme": ["libs/web/ui-theme/src"],
       "@ismedia/web/ui-widgets": ["libs/web/ui-widgets/src/index.ts"],
       "@ismedia/web/util-admin-fields": ["libs/web/util-admin-fields/src/index.ts"],
       "@ismedia/web/util-api-field-error": ["libs/web/util-api-field-error/src/index.ts"],
       "@ismedia/web/util-clickaway": ["libs/web/util-clickaway/src/index.ts"],
+      "@ismedia/web/util-doc": ["libs/web/util-doc/src/index.ts"],
+      "@ismedia/web/util-identicon": ["libs/web/util-identicon/src/index.ts"],
+      "@ismedia/web/util-save-file": ["libs/web/util-save-file/src/index.ts"],
       "@ismedia/web/util-validate": ["libs/web/util-validate/src/index.ts"],
       "@ismedia/web/util-vite-config": ["libs/web/util-vite-config/src/index.ts"],
       "@ui-assets/*": ["libs/web/ui-assets/src/*"]

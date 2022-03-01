@@ -1,20 +1,27 @@
-apiVersion: skaffold/v2beta23
+apiVersion: skaffold/v2beta26
 kind: Config
 build:
   local:
     useBuildkit: true
     push: false
   artifacts:
-    - image: flow.dev
+    # - image: flow.dev
+    - image: blockchain-emulator
       context: .
       docker:
-        dockerfile: apps/flow-test/Dockerfile
+        dockerfile: apps/blockchain-emulator/Dockerfile
+        target: dev
 deploy:
   kubeContext: docker-desktop
   kubectl:
     manifests:
       - tools/k8s/dev/blockchain/*.yaml
 portForward:
-  - resourceType: deployment
-    resourceName: flow-dev
+  - resourceType: service
+    resourceName: blockchain-emulator
     port: 7000
+    # On Macs :7000 is taken by Airplay Receiver service
+    localPort: 7001
+  - resourceType: service
+    resourceName: blockchain-emulator
+    port: 3002
