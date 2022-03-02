@@ -66,7 +66,7 @@ pub contract FrontRowStorefront {
   //
   // Parameters:  blueprintId: ID of the blueprint that was removed from sale
   //              serialNumber: the place in the edition that this NFT was minted
-  //                            It also represnts the total number of NFTs sold for 
+  //                            It also represents the total number of NFTs sold for
   //                            the blueprint so far
   //              soldOut: a boolean flag showing if all NFTs were completely sold out
   //
@@ -76,7 +76,7 @@ pub contract FrontRowStorefront {
   //
   // Parameters:  blueprintId: ID of the blueprint that was purchased
   //              serialNumber: the place in the edition that this NFT was minted
-  //                            It also represnts the total number of NFTs sold for 
+  //                            It also represents the total number of NFTs sold for
   //                            the blueprint so far
   //              soldOut: a boolean flag showing if all NFTs are completely sold out now
   //
@@ -187,8 +187,6 @@ pub contract FrontRowStorefront {
         payment.balance == self.details.price,
         message: "Payment vault doesn't have enough funds."
       )
-      // Check if NFTs are not sold out
-      assert(self.details.sold < blueprint.maxQuantity, message: "NFTs are sold out.")
 
       // Borrow minting capability for on demand minting
       let minter: &{FrontRow.Minter} = self.minterCapability.borrow()!
@@ -196,48 +194,14 @@ pub contract FrontRowStorefront {
 
       // Get serial number of the NFT that's about to be purchased.
       // The serial number based on a particular blueprint.
-      let nftSerialNumber : UInt32 = self.details.sold + 1
+      let nftSerialNumber : UInt32 = blueprint.getMintCount() + 1
 
-      // Get ID of the existing pre-minted NFT (NFT ID is the resource UUID)
-      // If it does not exist the value will be nil
-      let nftId : UInt64? = blueprint.getNftId(nftSerialNumber)
-
-      if nftId == nil {
-        return <- self.purchaseOnDemand(
-          payment: <- payment,
-          blueprintId: blueprint.id,
-          nftSerialNumber: nftSerialNumber,
-          maxQuantity: blueprint.maxQuantity
-        )
-      } else {
-        return <- self.purchasePreminted(
-          payment: <- payment,
-          nftId: nftId!,
-          maxQuantity: blueprint.maxQuantity
-        )
-      }
-    }
-
-    // purchaseOnDemand is an internal helper that mints an NFT on demand to fulfill purchase
-    // It pays the beneficiary and returns the token to the buyer.
-    //
-    // Parameters: payment: the FUSD payment for the NFT purchase
-    //             blueprintId: The ID of the Blueprint to mint from
-    //             nftSerialNumber: The expected serial number of the minted NFT
-    //             maxQuantity: Maximum quantity of the Blueprint
-    //
-    // Returns: purchased @FrontRow.NFT token
-    //
-    access(self) fun purchaseOnDemand(
-      payment: @FUSD.Vault,
-      blueprintId: UInt32,
-      nftSerialNumber: UInt32,
-      maxQuantity: UInt32
-    ): @FrontRow.NFT {
+      // Check if NFTs are sold out
+      assert(nftSerialNumber <= blueprint.maxQuantity, message: "NFTs are sold out.")
 
       let nft: @FrontRow.NFT <- self.minterCapability
         .borrow()!
-        .mintNFT(blueprintId: blueprintId)
+        .mintNFT(blueprintId: blueprint.id)
 
       // Neither receivers nor providers are trustworthy, they must implement the correct
       // interface but beyond complying with its pre/post conditions they are not
@@ -249,77 +213,26 @@ pub contract FrontRowStorefront {
         message: "Withdrawn NFT is not of FrontRow.NFT type."
       )
 
-      // NFT minted on demand: check the blueprint ID and the serial number
-      assert(nft.blueprintId == blueprintId && nft.serialNumber == nftSerialNumber,
+      // NFT minted: check the blueprint ID and the serial number
+      assert(nft.blueprintId == blueprint.id && nft.serialNumber == nftSerialNumber,
         message: "Selling incorrect NFT: serial number or/and blueprint are incorrect."
       )
 
-      self.recordPurchase(payment: <- payment, maxQuantity: maxQuantity)
-
-      // Returns purchased NFT token
-      return <-nft
-    }
-
-    // purchasePreminted is an internal helper sends a pre-minted NFT to fulfill a purchase
-    // It pays the beneficiary and returns the token to the buyer.
-    //
-    // Parameters: payment: the FUSD payment for the NFT purchase
-    //             nftId: The ID of the pre-minted NFT
-    //             maxQuantity: Maximum quantity of the Blueprint
-    //
-    // Returns: purchased @FrontRow.NFT token
-    //
-    access(self) fun purchasePreminted(
-      payment: @FUSD.Vault,
-      nftId: UInt64,
-      maxQuantity: UInt32
-    ): @FrontRow.NFT {
-      let nft: @FrontRow.NFT <- (self.nftProviderCapability.borrow()!
-          .withdraw(withdrawID: nftId) as! @FrontRow.NFT)
-
-      // Neither receivers nor providers are trustworthy, they must implement the correct
-      // interface but beyond complying with its pre/post conditions they are not
-      // guaranteed to implement interface's functionality.
-      // Therefore we cannot trust the Collection resource behind the interface,
-      // and must check the NFT resource it gives us to make sure that it correct.
-      assert(
-        nft.isInstance(Type<@FrontRow.NFT>()),
-        message: "Withdrawn NFT is not of FrontRow.NFT type."
-      )
-
-      // Pre-minted NFT: check ID of the withdrawn NFT
-      assert(nft.id == nftId,
-        message: "Selling incorrect NFT: withdrawn NFT has incorrect ID.")
-
-      self.recordPurchase(payment: <- payment, maxQuantity: maxQuantity)
-
-      // Returns purchased NFT token
-      return <-nft
-    }
-
-    // purchasePreminted is an internal helper for recording a purchase
-    // It also pays the beneficiary and emits a Purchase event
-    //
-    // Parameters: payment: the FUSD payment for the NFT purchase
-    //             maxQuantity: Maximum quantity of the Blueprint
-    //
-    access(self) fun recordPurchase(payment: @FUSD.Vault, maxQuantity: UInt32) {
-      // Send payment to the beneficiary
+       // Send payment to the beneficiary
       let beneficiary = self.details.beneficiary.borrow()
       beneficiary!.deposit(from: <-payment)
 
       // Increment the purchase amount
       self.details.recordPurchase()
 
-      let sold = self.details.sold
-
       // Emit the Purchase event
       emit Purchase(
         blueprintId: self.details.blueprintId,
-        serialNumber: sold,
+        serialNumber: nftSerialNumber,
         // If all minted NFTs for a bluprint are purchased, the offer is soldOut.
-        soldOut: sold == maxQuantity
+        soldOut: nftSerialNumber == blueprint.maxQuantity
       )
+      return <- nft
     }
 
     // Initialize resource fields

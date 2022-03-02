@@ -12,11 +12,9 @@ import {
 import {
   AccountManager,
   getTotalSupply,
-  batchMintNFT,
   setupFrontRowCollectionOnAccount,
   printBlueprint,
   getCollectionIDs,
-  getFrontRowNFTByBlueprint,
   getBlueprintsCount,
   getMintCountPerBlueprint,
   deployFrontRowStorefront,
@@ -69,39 +67,32 @@ let Frank: IFlowAccount
 const testData = [
   {
     saleOfferFixture: saleOfferA,
-    preMintQuantity: saleOfferA.blueprint.maxQuantity,
     shouldCreateSaleOffer: true,
   },
   {
     saleOfferFixture: saleOfferB,
-    preMintQuantity: saleOfferB.blueprint.maxQuantity,
     shouldCreateSaleOffer: true,
   },
   {
     saleOfferFixture: saleOfferC,
-    preMintQuantity: 0,
     shouldCreateSaleOffer: true,
   },
   {
     saleOfferFixture: saleOfferD,
-    preMintQuantity: 0,
     shouldCreateSaleOffer: false,
   },
   {
     saleOfferFixture: saleOfferE,
-    preMintQuantity: 0,
     shouldCreateSaleOffer: true,
   },
   {
     saleOfferFixture: saleOfferF,
-    preMintQuantity: saleOfferF.blueprint.maxQuantity,
     shouldCreateSaleOffer: true,
   },
 ]
 // Data for printing a blueprint and creating a sale offer in a single tx
 const printCreateData = {
   saleOfferFixture: saleOfferG,
-  preMintQuantity: 1,
 }
 let buyers: { account: IFlowAccount; amount: number }[] = []
 
@@ -206,14 +197,10 @@ describe('FrontRowStorefront Contract', () => {
     //
     it('prints blueprints and create sale offers', async () => {
       const signers = [Admin]
-      const recipient = Admin
-
-      // Keep the total count for later verification
-      let totalSupply = 0
 
       //
       for (const el of testData) {
-        const { saleOfferFixture, preMintQuantity, shouldCreateSaleOffer } = el
+        const { saleOfferFixture, shouldCreateSaleOffer } = el
         const blueprintFixture = saleOfferFixture.blueprint
         const { maxQuantity, metadata } = blueprintFixture
 
@@ -222,16 +209,6 @@ describe('FrontRowStorefront Contract', () => {
 
         // Get printed blueprint with the actual ID
         const blueprint = await getBlueprintByMetadata('title', metadata.title)
-
-        // Mint NFTs
-        if (preMintQuantity != 0) {
-          expect(
-            await shallPass(
-              batchMintNFT(blueprint.id, preMintQuantity, recipient, signers),
-            ),
-          )
-          totalSupply += preMintQuantity
-        }
 
         // Create a sale offer if the "create" flag is set to true
         if (shouldCreateSaleOffer) {
@@ -267,7 +244,7 @@ describe('FrontRowStorefront Contract', () => {
 
       // Check the total number of minted NFTs
       const totalNftCount = await getTotalSupply()
-      expect(totalNftCount).toBe(totalSupply)
+      expect(totalNftCount).toBe(0)
     })
 
     //
@@ -312,8 +289,7 @@ describe('FrontRowStorefront Contract', () => {
 
     it('prints a blueprint and create a sale offer in a single transaction', async () => {
       const seller = Admin
-      const recipient = Admin
-      const { saleOfferFixture, preMintQuantity } = printCreateData
+      const { saleOfferFixture } = printCreateData
       const { price, blueprint } = saleOfferFixture
       const { maxQuantity, metadata } = blueprint
 
@@ -333,93 +309,15 @@ describe('FrontRowStorefront Contract', () => {
 
       // Set the blueprintId on the saleOfferFixture
       saleOfferFixture.blueprintId = flowBlueprint.id
-
-      // Mint NFTs
-      expect(
-        await shallPass(
-          batchMintNFT(flowBlueprint.id, preMintQuantity, recipient, [Admin]),
-        ),
-      )
     })
   })
 
   //
   describe('Non-admin user purchasing one NFT via a sale offer', () => {
-    // Keep track of nftId for different tests
-    let nftId: number
-
     it('does not have a FrontRow collection set up before purchasing', async () => {
       await expect(getCollectionIDs(Eve)).rejects.toThrowError(
         'Could not borrow capability from public collection',
       )
-    })
-
-    //
-    it('purchases one pre-minted NFT via a sale offer', async () => {
-      // Check the Admin and Eve balances before the purchase
-      const beforeAdminBalance = await getFusdBalance(Admin)
-      const beforeEveBalance = await getFusdBalance(Eve)
-      const blueprintId = saleOfferA.blueprintId || 0
-
-      // Get NFT that will be sold first
-      const nftForSale = await getFrontRowNFTByBlueprint(Admin, blueprintId, 1)
-      nftId = nftForSale.id
-
-      const buyNftTxResult = await shallPass(buyNFT(Eve, blueprintId))
-      const listedPriceUFix64 = toUFix64(saleOfferA.price / 100)
-
-      // Check transaction details in the emitted event
-      expect(buyNftTxResult).toEmit(
-        expectedBuyEvents({
-          seller: Admin,
-          buyer: Eve,
-          blueprintId,
-          nftId,
-          priceUFix64: listedPriceUFix64,
-          soldOut: true,
-        }),
-      )
-
-      // Check Eve owns the NFT
-      const isOwner = await isNftOwner(Eve.address, blueprintId, 1)
-      expect(isOwner).toBe(true)
-
-      // Check the balances after the purchase
-      const afterAdminBalance = await getFusdBalance(Admin)
-      const afterEveBalance = await getFusdBalance(Eve)
-
-      const expectedAdminBalance = parseFloat(beforeAdminBalance) + saleOfferA.price / 100
-      const expectedEveBalance = parseFloat(beforeEveBalance) - saleOfferA.price / 100
-
-      // Make sure the purchase has been reflected correctly in balances of both parties
-      expect(afterAdminBalance).toBe(toUFix64(expectedAdminBalance))
-      expect(afterEveBalance).toBe(toUFix64(expectedEveBalance))
-    })
-
-    //
-    it("moves purchased NFT into buyer's collection", async () => {
-      // Eve should have a FrontRow collection after calling buy_nft
-      const purchaserCollectionIDs = await getCollectionIDs(Eve)
-
-      // Check if correct NFT has been purchased
-      expect(purchaserCollectionIDs.length).toBe(1)
-      expect(purchaserCollectionIDs[0]).toBe(nftId)
-    })
-
-    //
-    it("removes the purchased NFT from the seller's collection", async () => {
-      const sellerCollectionIDs = await getCollectionIDs(Admin)
-
-      // Make sure Admin no longer has this NFT in its collection
-      expect(sellerCollectionIDs.includes(nftId)).toBe(false)
-    })
-
-    //
-    it('cannot purchase NFTs when they are sold out', async () => {
-      //
-      const blueprintId = saleOfferA.blueprintId || 0
-      await expect(buyNFT(Eve, blueprintId)).rejects.toMatch('NFTs are sold out.')
-      expect.assertions(1)
     })
 
     //
@@ -451,16 +349,15 @@ describe('FrontRowStorefront Contract', () => {
         blueprintC.metadata.title,
       )
 
-      // There shouldn't be any pre-minted NFTs for this blueprint
+      // There shouldn't yet be any NFTs for this blueprint
       const mintCount = await getMintCountPerBlueprint(blueprintId)
       expect(mintCount).toBe(0)
 
-      // Since there are no pre-minted NFTs, the purchased NFT should be minted on the fly
+      // The purchased NFT is minted on the fly
       const buyNftTxResult = await shallPass(buyNFT(Eve, blueprintId))
       const listedPriceUFix64 = toUFix64(saleOfferC.price / 100)
 
       // Check transaction details in the emitted event
-      // Make sure the "FrontRow.Withdraw" event didn't fire since we've minted on demand
       expect(buyNftTxResult).toEmit(
         expectedBuyEvents({
           seller: Admin,
@@ -491,10 +388,28 @@ describe('FrontRowStorefront Contract', () => {
       // The mint count should be 1
       const mintCountAfter = await getMintCountPerBlueprint(blueprintId)
       expect(mintCountAfter).toBe(1)
+
+      // Eve should have a FrontRow collection after calling buy_nft
+      const purchaserCollectionIDs = await getCollectionIDs(Eve)
+
+      // Check if correct NFT has been purchased
+      expect(purchaserCollectionIDs.length).toBe(1)
+      expect(purchaserCollectionIDs[0]).toBe(nextNftId)
     })
 
     //
-    it('cannot purchase over `maxQuantity` NFTs while minting on demand', async () => {
+    it('cannot purchase NFTs when they are sold out', async () => {
+      const blueprintId = saleOfferA.blueprintId || 0
+
+      // Purchase the only NFT available in saleOfferA
+      await shallPass(buyNFT(Eve, blueprintId))
+
+      // Cannot purchase once sold out
+      await expect(buyNFT(Eve, blueprintId)).rejects.toMatch('NFTs are sold out.')
+    })
+
+    //
+    it('cannot purchase over `maxQuantity` NFTs', async () => {
       const beforeAdminBalance = parseFloat(await getFusdBalance(Admin))
       const beforeEveBalance = parseFloat(await getFusdBalance(Eve))
 
@@ -550,32 +465,33 @@ describe('FrontRowStorefront Contract', () => {
         blueprintG.metadata.title,
       )
 
-      // Get NFT that will be sold first
-      const nftForSale = await getFrontRowNFTByBlueprint(Admin, blueprintId, 1)
-      nftId = nftForSale.id
-
       // Get ID of the NFT that should be sold next
       const totalSupply = await getTotalSupply()
       const nextNftId = totalSupply + 1
 
-      // Verify premint count
-      const mintCount = await getMintCountPerBlueprint(blueprintId)
-      expect(mintCount).toBe(printCreateData.preMintQuantity)
-
-      const buyNftTxResult1 = await shallPass(buyNFT(Eve, blueprintId))
       const listedPriceUFix64 = toUFix64(saleOfferG.price / 100)
 
+      // Verify the Blueprint has not minted any NFTs
+      const mintCount = await getMintCountPerBlueprint(blueprintId)
+      expect(mintCount).toBe(0)
+
+      // Purchase NFT
+      const buyNftTxResult = await shallPass(buyNFT(Eve, blueprintId))
+
       // Check transaction details in the emitted event
-      // Make sure the "FrontRow.Withdraw" event didn't fire since we've minted on demand
-      expect(buyNftTxResult1).toEmit(
+      expect(buyNftTxResult).toEmit(
         expectedBuyEvents({
           seller: Admin,
           buyer: Eve,
           blueprintId,
-          nftId,
+          nftId: nextNftId,
           priceUFix64: listedPriceUFix64,
+          serialNumber: 1,
         }),
       )
+      // The mint count should increment
+      const mintCountAfterSecond = await getMintCountPerBlueprint(blueprintId)
+      expect(mintCountAfterSecond).toBe(mintCount + 1)
 
       // Check the balances after the purchase
       const afterAdminBalance = await getFusdBalance(Admin)
@@ -588,29 +504,6 @@ describe('FrontRowStorefront Contract', () => {
       // Make sure the purchase has been reflected correctly in balances of both parties
       expect(afterAdminBalance).toBe(toUFix64(expectedAdminBalance))
       expect(afterEveBalance).toBe(toUFix64(expectedEveBalance))
-
-      // The mint count should not increment
-      const mintCountAfterFirst = await getMintCountPerBlueprint(blueprintId)
-      expect(mintCountAfterFirst).toBe(mintCount)
-
-      // Since there are no more pre-minted NFTs, the next purchased NFT should be minted on demand
-      const buyNftTxResult2 = await shallPass(buyNFT(Eve, blueprintId))
-
-      // Check transaction details in the emitted event
-      // Make sure the "FrontRow.Withdraw" event didn't fire since we've minted on demand
-      expect(buyNftTxResult2).toEmit(
-        expectedBuyEvents({
-          seller: Admin,
-          buyer: Eve,
-          blueprintId,
-          nftId: nextNftId,
-          priceUFix64: listedPriceUFix64,
-          serialNumber: 2,
-        }),
-      )
-      // The mint count should increment
-      const mintCountAfterSecond = await getMintCountPerBlueprint(blueprintId)
-      expect(mintCountAfterSecond).toBe(mintCount + 1)
     })
   })
 
