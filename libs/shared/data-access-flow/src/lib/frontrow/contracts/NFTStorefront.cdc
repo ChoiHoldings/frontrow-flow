@@ -67,7 +67,13 @@ pub contract NFTStorefront {
   // ListingCompleted
   // The listing has been resolved. It has either been purchased, or removed and destroyed.
   //
-  pub event ListingCompleted(listingResourceID: UInt64, storefrontResourceID: UInt64, purchased: Bool)
+  pub event ListingCompleted(
+    listingResourceID: UInt64,
+    storefrontResourceID: UInt64,
+    purchased: Bool,
+    nftType: Type,
+    nftID: UInt64
+  )
 
   // StorefrontStoragePath
   // The location in storage that a Storefront resource should be located.
@@ -145,7 +151,6 @@ pub contract NFTStorefront {
       self.nftType = nftType
       self.nftID = nftID
       self.salePaymentVaultType = salePaymentVaultType
-
       // Store the cuts
       assert(saleCuts.length > 0, message: "Listing must have at least one payment cut recipient")
       self.saleCuts = saleCuts
@@ -157,7 +162,7 @@ pub contract NFTStorefront {
         // Make sure we can borrow the receiver.
         // We will check this again when the token is sold.
         cut.receiver.borrow()
-            ?? panic("Cannot borrow receiver")
+          ?? panic("Cannot borrow receiver")
         // Add the cut amount to the total price
         salePrice = salePrice + cut.amount
       }
@@ -213,7 +218,7 @@ pub contract NFTStorefront {
       //  result.isInstance(self.getDetails().nftType): "token has wrong type"
       assert(ref.isInstance(self.getDetails().nftType), message: "token has wrong type")
       assert(ref.id == self.getDetails().nftID, message: "token has wrong ID")
-      return ref
+      return ref as &NonFungibleToken.NFT
     }
 
     // getDetails
@@ -277,7 +282,9 @@ pub contract NFTStorefront {
       emit ListingCompleted(
         listingResourceID: self.uuid,
         storefrontResourceID: self.details.storefrontID,
-        purchased: self.details.purchased
+        purchased: self.details.purchased,
+        nftType: self.details.nftType,
+        nftID: self.details.nftID
       )
 
       return <-nft
@@ -295,7 +302,9 @@ pub contract NFTStorefront {
         emit ListingCompleted(
           listingResourceID: self.uuid,
           storefrontResourceID: self.details.storefrontID,
-          purchased: self.details.purchased
+          purchased: self.details.purchased,
+          nftType: self.details.nftType,
+          nftID: self.details.nftID
         )
       }
     }
@@ -418,7 +427,7 @@ pub contract NFTStorefront {
     //
     pub fun removeListing(listingResourceID: UInt64) {
       let listing <- self.listings.remove(key: listingResourceID)
-          ?? panic("missing Listing")
+        ?? panic("missing Listing")
 
       // This will emit a ListingCompleted event.
       destroy listing

@@ -70,3 +70,39 @@ export const ListingAvailableEventsMock: CadenceEvent[] = [
     },
   },
 ]
+
+export const ListingAvailableValidEventMock: CadenceEvent = {
+  blockId: '13a91716a9568f58e4309013483752abb24ed47c0701322354207caa8d5e7706',
+  blockHeight: 23839313,
+  blockTimestamp: '2022-02-10T04:13:27.626Z',
+  type: 'A.4eb8a10cb9f87357.NFTStorefront.ListingAvailable',
+  transactionId: '6e6b385795619a75da313cb082a29fdb2e58f691a74f290d396c1ff98c474057',
+  transactionIndex: 3,
+  eventIndex: 0,
+  data: {
+    storefrontAddress: '0x409fa2c4accd49e8',
+    listingResourceID: 138379722,
+    nftType: 'A.8b148183c28ff88f.FrontRow.NFT',
+    nftID: 900,
+    ftVaultType: 'A.ead892083b3e2c6c.FUSD.Vault',
+    price: '250.00000000',
+  },
+}
+
+export const ListingAvailableInvalidEventMock: CadenceEvent = {
+  blockId: '13a91716a9568f58e4309013483752abb24ed47c0701322354207caa8d5e7706',
+  blockHeight: 23839313,
+  blockTimestamp: '2022-02-10T04:13:27.626Z',
+  type: 'A.4eb8a10cb9f87357.NFTStorefront.ListingAvailable',
+  transactionId: 'f54f181609b5928cf43564cd5897da65304d18ed55eec0add434034d521b3b28',
+  transactionIndex: 0,
+  eventIndex: 1,
+  data: {
+    storefrontAddress: '0x22a0de8155a6bea7',
+    listingResourceID: 138379724,
+    nftType: 'A.01ab36aaf654a13e.RaribleNFT.NFT',
+    nftID: 117789,
+    ftVaultType: 'A.1654653399040a61.FlowToken.Vault',
+    price: '0.09900000',
+  },
+}

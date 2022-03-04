@@ -95,6 +95,19 @@ export const getListing = async (account: IFlowAccount, listingId: number) => {
 }
 
 /*
+ * Returns the listing NFT information for the given resource id
+ * @param {t.Address} address - storefront address
+ * @throws Will throw an error if execution will be halted
+ * @returns {UInt64}
+ * */
+export const getListingNft = async (address: t.Address, listingId: number) => {
+  const name = 'nftStorefront/get_listing_nft'
+  const args = [arg(address, t.Address), arg(listingId, t.UInt64)]
+
+  return execute(name, args)
+}
+
+/*
  * Returns the number of items for sale in a given account's storefront.
  * @param {IFlowAccount} account - account address
  * @throws Will throw an error if execution will be halted

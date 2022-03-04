@@ -12,6 +12,7 @@ build:
         dockerfile: apps/blockchain-emulator/Dockerfile
         target: dev
 deploy:
+  # kubeContext: rancher-desktop
   kubeContext: docker-desktop
   kubectl:
     manifests:

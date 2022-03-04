@@ -46,7 +46,7 @@ const purchaseEvent: CadenceEvent = {
   blockHeight: 23839302,
   blockTimestamp: '2022-02-10T04:13:13.091Z',
   type: 'FrontRowStorefront.Purchase',
-  data: { blueprintId: 1, sold: 1, soldOut: false },
+  data: { blueprintId: 1, serialNumber: 1, soldOut: false },
 }
 const depositEvent: CadenceEvent = {
   transactionId: '00000000-0000-0000-0000-000000000004',

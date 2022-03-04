@@ -34,6 +34,8 @@ jest.setTimeout(15000)
 
 const accounts = new AccountManager()
 
+const NFT_STOREFRONT_ADDRESS = 'f8d6e0586b0a20c7'
+
 //
 let Admin: IFlowAccount
 let Eve: IFlowAccount
@@ -78,6 +80,8 @@ const expectedPurchaseListingEvents = (purchaseEventProps: PurchaseEventProps) =
         listingResourceID: listingId,
         storefrontResourceID: storefrontId,
         purchased: true,
+        nftType: getEventId(NFT_STOREFRONT_ADDRESS, 'FrontRow', 'NFT', 'A'),
+        nftID: nftId,
       },
     },
     {
@@ -208,6 +212,8 @@ describe('NFTStorefront Contract', () => {
             listingResourceID: listingId,
             storefrontResourceID: storefrontId,
             purchased: false,
+            nftType: getEventId(NFT_STOREFRONT_ADDRESS, 'FrontRow', 'NFT', 'A'),
+            nftID: 1,
           },
         },
       ])

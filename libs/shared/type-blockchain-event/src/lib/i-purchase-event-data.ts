@@ -1,5 +1,5 @@
 export interface IPurchaseEventData {
   blueprintId: number
-  sold: number
+  serialNumber: number
   soldOut: boolean
 }

@@ -9,14 +9,14 @@ export const getBlueprintPurchaseEventData = (
   const eventType = 'FrontRowStorefront.Purchase'
   const event: CadenceEvent | undefined = findEvent(events ?? [], eventType)
 
-  const { blueprintId, sold, soldOut } = event?.data || {}
-  if (blueprintId === undefined || sold === undefined || soldOut === undefined) {
+  const { blueprintId, serialNumber, soldOut } = event?.data || {}
+  if (blueprintId === undefined || serialNumber === undefined || soldOut === undefined) {
     return undefined
   }
 
   return {
     blueprintId: blueprintId as number,
-    sold: sold as number,
+    serialNumber: serialNumber as number,
     soldOut: soldOut as boolean,
   }
 }
